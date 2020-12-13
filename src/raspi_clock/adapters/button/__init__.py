@@ -1,4 +1,5 @@
-from evdev import InputDevice, ecodes, select
+from evdev import InputDevice, ecodes
+from select import select
 
 from raspi_clock.setting import ClickerSettings
 

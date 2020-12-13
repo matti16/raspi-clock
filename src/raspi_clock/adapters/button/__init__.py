@@ -17,7 +17,7 @@ class Clicker():
                         if event.code == ClickerSettings.btn_code:
                             print("Clicker pressed")
                             clicker.close()
-                            return True
+                            break
         except Exception:
             found = False
             print("Clicker not found. Waiting for clicker")
@@ -26,6 +26,7 @@ class Clicker():
                     clicker = InputDevice(self.input_device)
                     print("Clicker found")
                     clicker.close()
-                    return True
+                    found = True
                 except Exception:
                     pass
+        return True

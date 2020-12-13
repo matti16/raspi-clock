@@ -1,3 +1,5 @@
+import time
+
 from raspi_clock.controllers import Alarm, RaspiClock, AlarmsChangedHandler
 from raspi_clock.setting import AlarmSettings
 
@@ -18,15 +20,22 @@ class Main():
     
     def observe_alarms(self, filepath):
         event_handler = AlarmsChangedHandler(self.alarm_clock)
-        observer = Observer()
-        observer.schedule(event_handler, path=filepath, recursive=False)
-        observer.start()
-        
+        self.observer = Observer()
+        self.observer.schedule(event_handler, path=filepath, recursive=False)
+        self.observer.start()
+    
+    def stop(self):
+        self.observer.stop()
+        self.observer.join()
 
 
 if __name__ == "__main__":
     main = Main()
-
     main.observe_alarms(AlarmSettings.alarms_path)
-
     main.start()
+
+    try:
+        while True:
+            time.sleep(1)
+    except KeyboardInterrupt:
+        main.stop()

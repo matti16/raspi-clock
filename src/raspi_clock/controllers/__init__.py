@@ -76,10 +76,18 @@ class RaspiClock():
             schedule.every().day.at(a).do(self.start_alarm)
 
 
-    def schedule_loop(self):
+    def check_schedules(self):
         while True:
             schedule.run_pending()
             time.sleep(1)
+
+
+    def schedule_loop(self):
+        self.schedule_thread = threading.Thread(
+            target=self.check_schedules
+        )
+        self.schedule_thread.start()
+
 
 
 class AlarmsChangedHandler(FileSystemEventHandler):

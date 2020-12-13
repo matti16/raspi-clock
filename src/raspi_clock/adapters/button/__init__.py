@@ -18,8 +18,9 @@ class Clicker():
                             print("Clicker pressed")
                             clicker.close()
                             break
-        except Exception:
+        except Exception as e:
             found = False
+            print(e)
             print("Clicker not found. Waiting for clicker")
             while not found:
                 try:

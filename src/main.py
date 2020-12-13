@@ -19,9 +19,7 @@ class RaspiClock():
 
 
     def start_alarm(self):
-        self.display_thread._stop()
         self.alarm.start_alarm()
-        self.start_display_time_thread()
 
 
     def schedule_alarms(self):

@@ -12,9 +12,12 @@ class Clicker():
             clicker = InputDevice(self.input_device)
             print("Clicker present")
             for event in clicker.read_loop():
-                print(f"Clicker event {event}")
-                clicker.close()
-                break
+                if event.type == ecodes.EV_KEY:
+                    if event.value == ClickerSettings.ev_val_pressed:
+                        if event.code == ClickerSettings.btn_code:
+                            print("Clicker pressed")
+                            clicker.close()
+                            break
         except Exception:
             found = False
             print("Clicker not found. Waiting for clicker")

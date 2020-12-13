@@ -40,7 +40,7 @@ class Alarm():
 
     def start_alarm(self, lock):
         with lock:
-            self.display.display_string("SVEGLIA!!!!!!!", 2)
+            self.display.display_string("  SVEGLIA!!!!!  ", 2)
             print("Staring alarm..")
             self.player.play()
             print("Waiting for click..")

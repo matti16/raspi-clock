@@ -5,12 +5,27 @@ from raspi_clock.setting import ClickerSettings
 class Clicker():
 
     def __init__(self, input_device=ClickerSettings.input_device):
-        self.clicker = InputDevice(input_device)
+        self.input_device = input_device
 
     def wait_for_click(self):
-        for event in self.clicker.read_loop():
-            if event.type == ecodes.EV_KEY:
-                if event.value == ClickerSettings.ev_val_pressed:
-                    if event.code == ClickerSettings.btn_code:
-                        print("Clicker pressed")
-                        return True
+        try:
+            clicker = InputDevice(self.input_device)
+            print("Clicker present")
+            for event in clicker.read_loop():
+                if event.type == ecodes.EV_KEY:
+                    if event.value == ClickerSettings.ev_val_pressed:
+                        if event.code == ClickerSettings.btn_code:
+                            print("Clicker pressed")
+                            clicker.close()
+                            return True
+        except Exception:
+            found = False
+            print("Clicker not found. Waiting for clicker")
+            while not found:
+                try:
+                    clicker = InputDevice(self.input_device)
+                    print("Clicker found")
+                    clicker.close()
+                    return True
+                except Exception:
+                    pass

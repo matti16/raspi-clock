@@ -35,7 +35,6 @@ class Alarm():
             with lock:
                 self.display.display_string(time.strftime('    %H:%M:%S    '), 1)
                 self.display.display_string(time.strftime('  %d %b %Y   '), 2)
-            time.sleep(0.5)
     
 
     def start_alarm(self, lock):

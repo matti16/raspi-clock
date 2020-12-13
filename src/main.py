@@ -1,47 +1,32 @@
-import schedule
-import threading
-import time
+from raspi_clock.controllers import Alarm, RaspiClock, AlarmsChangedHandler
+from raspi_clock.setting import AlarmSettings
 
-from raspi_clock.controllers import Alarm
+from watchdog.observers import Observer
 
+class Main():
 
-
-class RaspiClock():
-    
     def __init__(self):
-        self.alarm = Alarm()
-        self.alarms = self.alarm.read_alarms()
-
-
-    def start_display_time_thread(self):
-        self.display_thread = threading.Thread(target=self.alarm.show_current_time)
-        self.display_thread.start()
-
-
-    def start_alarm(self):
-        self.alarm.start_alarm()
-
-
-    def schedule_alarms(self):
-        schedule.clear()
-        for a in self.alarms:
-            print(f"Scheduling alarm at {a}")
-            schedule.every().day.at(a).do(self.start_alarm)
-
-
-    def schedule_loop(self):
-        while True:
-            schedule.run_pending()
-            time.sleep(1)
-
-
-
-def main():
-    main_alarm = RaspiClock()
-    main_alarm.start_display_time_thread()
-    main_alarm.schedule_alarms()
-    main_alarm.schedule_loop()
+        self.alarm_clock = RaspiClock()
+    
+    def start(self):
+        self.alarm_clock.start_display_time_thread()
+        self.alarm_clock.schedule_alarms()
+        self.alarm_clock.schedule_loop()
+    
+    def reload_alarms(self):
+        self.alarm_clock.schedule_alarms()
+    
+    def observe_alarms(self, filepath):
+        event_handler = AlarmsChangedHandler(self.alarm_clock)
+        observer = Observer()
+        observer.schedule(event_handler, path=filepath, recursive=False)
+        observer.start()
+        
 
 
 if __name__ == "__main__":
-    main()
+    main = Main()
+
+    main.observe_alarms(AlarmSettings.alarms_path)
+
+    main.start()

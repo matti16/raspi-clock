@@ -2,3 +2,4 @@ vlc
 smbus
 evdev
 schedule
+watchdog

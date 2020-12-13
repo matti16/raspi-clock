@@ -1,4 +1,4 @@
-from evdev import InputDevice, ecodes
+from evdev import InputDevice, ecodes, select
 
 from raspi_clock.setting import ClickerSettings
 
@@ -11,13 +11,11 @@ class Clicker():
         try:
             clicker = InputDevice(self.input_device)
             print("Clicker present")
-            for event in clicker.read_loop():
-                if event.type == ecodes.EV_KEY:
-                    if event.value == ClickerSettings.ev_val_pressed:
-                        if event.code == ClickerSettings.btn_code:
-                            print("Clicker pressed")
-                            clicker.close()
-                            break
+            r,_,_ = select([clicker.fd], [], [], 0.1)
+            while not r:
+                r,_,_ = select([clicker.fd], [], [], 0.1)
+            print("Clicker pressed")
+            clicker.close()
         except Exception as e:
             found = False
             print(e)

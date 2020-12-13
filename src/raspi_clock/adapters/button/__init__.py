@@ -8,7 +8,7 @@ class Clicker():
     def __init__(self, input_device=ClickerSettings.input_device):
         self.input_device = input_device
 
-    def wait_for_click(self):
+    async def wait_for_click(self):
         try:
             clicker = InputDevice(self.input_device)
             print("Clicker present")
@@ -17,6 +17,8 @@ class Clicker():
                 r,_,_ = select([clicker.fd], [], [], 0.1)
             print("Clicker pressed")
             clicker.close()
+            return True
+
         except Exception as e:
             found = False
             print(e)
@@ -28,4 +30,5 @@ class Clicker():
                     found = True
                 except Exception:
                     pass
+        
         return True

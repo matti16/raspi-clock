@@ -3,6 +3,7 @@ import time
 
 import threading
 import schedule
+import asyncio
 
 from watchdog.events import FileSystemEventHandler
 
@@ -44,7 +45,9 @@ class Alarm():
             print("Staring alarm..")
             self.player.play()
             print("Waiting for click..")
-            self.clicker.wait_for_click()
+            loop = asyncio.get_event_loop()
+            loop.run_until_complete(self.clicker.wait_for_click())
+            print("Stopping alarm..")
             self.player.stop()
 
 

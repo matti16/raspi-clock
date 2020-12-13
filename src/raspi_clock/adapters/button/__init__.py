@@ -26,7 +26,6 @@ class Clicker():
                     clicker = InputDevice(self.input_device)
                     print("Clicker found")
                     found = True
-                    clicker.close()
-                except Exception as e:
-                    print(e)
+                except Exception:
+                    pass
         return True

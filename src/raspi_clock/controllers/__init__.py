@@ -26,12 +26,15 @@ class Alarm():
 
 
     def start_alarm(self):
+        print("Staring alarm..")
         self.player.play()
+        print("Waiting for click..")
         self.clicker.wait_for_click()
         self.player.stop()
 
     
     def show_current_time(self):
-        self.display.display_string(time.strftime('    %H:%M:%S    '), 1)
-        self.display.display_string(time.strftime('  %d %b %Y   '), 2)
+        while True:
+            self.display.display_string(time.strftime('    %H:%M:%S    '), 1)
+            self.display.display_string(time.strftime('  %d %b %Y   '), 2)
 

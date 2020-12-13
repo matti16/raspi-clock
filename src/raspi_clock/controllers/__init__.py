@@ -24,9 +24,9 @@ class Alarm():
         try:
             alarms = json.load(open(AlarmSettings.alarms_path))
             print(f"Loaded {alarms}")
-        except Exception:
+        except Exception as e:
             alarms = []
-            print(f"Alarms not found")
+            print(e)
         return alarms
 
     
@@ -39,7 +39,9 @@ class Alarm():
     
 
     def start_alarm(self, lock):
+        print("start_alarm Acquiring Lock")
         with lock:
+            print("start_alarm Lock acquired")
             self.display.display_string("  SVEGLIA!!!!!  ", 2)
             print("Staring alarm..")
             self.player.play()

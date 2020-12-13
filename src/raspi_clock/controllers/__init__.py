@@ -36,26 +36,36 @@ class Alarm():
         print("Waiting for click..")
         self.clicker.wait_for_click()
         self.player.stop()
+    
+
+    def display_string(self, string, line):
+        self.display.display_string(string, line)
 
     
-    def show_current_time(self):
+    def show_current_time(self, lock):
         while True:
-            self.display.display_string(time.strftime('    %H:%M:%S    '), 1)
-            self.display.display_string(time.strftime('  %d %b %Y   '), 2)
+            with lock:
+                self.display.display_string(time.strftime('    %H:%M:%S    '), 1)
+                self.display.display_string(time.strftime('  %d %b %Y   '), 2)
 
 
 class RaspiClock():
     
     def __init__(self):
         self.alarm = Alarm()
+        self.lock = threading.Lock()
 
     def start_display_time_thread(self):
-        self.display_thread = threading.Thread(target=self.alarm.show_current_time)
+        self.display_thread = threading.Thread(
+            target=self.alarm.show_current_time, args=(self.lock, )
+        )
         self.display_thread.start()
 
 
     def start_alarm(self):
-        self.alarm.start_alarm()
+        with self.lock:
+            self.alarm.display_string("SVEGLIA!!!!!!!", 2)
+            self.alarm.start_alarm()
 
 
     def schedule_alarms(self):

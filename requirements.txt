@@ -1,0 +1,4 @@
+vlc
+smbus
+evdev
+schedule

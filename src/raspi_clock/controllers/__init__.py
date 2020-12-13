@@ -29,24 +29,23 @@ class Alarm():
             print(f"Alarms not found")
         return alarms
 
-
-    def start_alarm(self):
-        print("Staring alarm..")
-        self.player.play()
-        print("Waiting for click..")
-        self.clicker.wait_for_click()
-        self.player.stop()
-    
-
-    def display_string(self, string, line):
-        self.display.display_string(string, line)
-
     
     def show_current_time(self, lock):
         while True:
             with lock:
                 self.display.display_string(time.strftime('    %H:%M:%S    '), 1)
                 self.display.display_string(time.strftime('  %d %b %Y   '), 2)
+            time.sleep(0.5)
+    
+
+    def start_alarm(self, lock):
+        with lock:
+            self.display.display_string("SVEGLIA!!!!!!!", 2)
+            print("Staring alarm..")
+            self.player.play()
+            print("Waiting for click..")
+            self.clicker.wait_for_click()
+            self.player.stop()
 
 
 class RaspiClock():
@@ -63,9 +62,10 @@ class RaspiClock():
 
 
     def start_alarm(self):
-        with self.lock:
-            self.alarm.display_string("SVEGLIA!!!!!!!", 2)
-            self.alarm.start_alarm()
+        self.alarm_thread = threading.Thread(
+            target=self.alarm.start_alarm, args=(self.lock, )
+        )
+        self.alarm_thread.start()
 
 
     def schedule_alarms(self):

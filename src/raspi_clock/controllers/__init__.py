@@ -39,9 +39,7 @@ class Alarm():
     
 
     def start_alarm(self, lock):
-        print("start_alarm Acquiring Lock")
         with lock:
-            print("start_alarm Lock acquired")
             self.display.display_string("  SVEGLIA!!!!!  ", 2)
             print("Staring alarm..")
             self.player.play()

@@ -12,3 +12,6 @@ class ClickerSettings(object):
 class AlarmSettings(object):
     alarms_path = "/home/pi/raspi-clock/alarms.json"
 
+class JoystickSettings(object):
+    alarms_path = "/home/pi/raspi-clock/alarms.json"
+

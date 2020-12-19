@@ -9,6 +9,7 @@ from watchdog.events import FileSystemEventHandler
 from raspi_clock.adapters.audio import SongPlayer
 from raspi_clock.adapters.display import DisplayLCD
 from raspi_clock.adapters.button import Clicker
+from raspi_clock.adapters.joystick import Joystick
 
 from raspi_clock.setting import AlarmSettings
 
@@ -22,12 +23,12 @@ class Alarm():
 
     def read_alarms(self):
         try:
-            alarms = json.load(open(AlarmSettings.alarms_path))
-            print(f"Loaded {alarms}")
+            self.alarms = json.load(open(AlarmSettings.alarms_path))
+            print(f"Loaded {self.alarms}")
         except Exception as e:
-            alarms = []
+            self.alarms = []
             print(e)
-        return alarms
+        return self.alarms
 
     
     def show_current_time(self, lock):
@@ -84,6 +85,29 @@ class RaspiClock():
             target=self.check_schedules
         )
         self.schedule_thread.start()
+
+
+
+class JoystickController():
+
+    def __init__(self, clock):
+        self.clock = clock
+        self.joystick = Joystick()
+    
+    def click_listener(self):
+        while True:
+            z_read = self.joystick.read_z()
+            if z_read == 0:
+                self.show_alarms()
+
+    def show_alarms(self):
+        with self.clock.lock:
+            if len(self.clock.alarm.alarms):
+                self.clock.alarm.display.display_string("Current Alarms", 1)
+                self.clock.alarm.display.display_string(self.clock.alarm.alarms[0], 2)
+            else:
+                self.clock.alarm.display.display_string("No Alarms Set", 1)
+            time.sleep(2)
 
 
 

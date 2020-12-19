@@ -13,5 +13,7 @@ class AlarmSettings(object):
     alarms_path = "/home/pi/raspi-clock/alarms.json"
 
 class JoystickSettings(object):
-    alarms_path = "/home/pi/raspi-clock/alarms.json"
+    z_pin = 12
+    y_adc = 0
+    x_adc = 1
 

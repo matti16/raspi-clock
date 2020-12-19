@@ -103,7 +103,7 @@ class JoystickController():
     def show_alarms(self):
         with self.clock.lock:
             if len(self.clock.alarm.alarms):
-                self.clock.alarm.display.display_string(" Current Alarms ", 1)
+                self.clock.alarm.display.display_string(" Current Alarm ", 1)
                 self.clock.alarm.display.display_string(f"     {self.clock.alarm.alarms[0]}     ", 2)
             else:
                 self.clock.alarm.display.display_string("No Alarms Set", 1)

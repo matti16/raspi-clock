@@ -62,10 +62,7 @@ class RaspiClock():
 
 
     def start_alarm(self):
-        self.alarm_thread = threading.Thread(
-            target=self.alarm.start_alarm, args=(self.lock, )
-        )
-        self.alarm_thread.start()
+        self.alarm.start_alarm(self.lock)
 
 
     def schedule_alarms(self):

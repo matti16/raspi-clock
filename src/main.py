@@ -16,7 +16,7 @@ class Main():
         self.alarm_clock.start_display_time_thread()
         self.alarm_clock.schedule_alarms()
         self.alarm_clock.schedule_loop()
-        threading.Thread(target=self.joystick_controller.click_listener)
+        threading.Thread(target=self.joystick_controller.click_listener).start()
         
     
     def reload_alarms(self):

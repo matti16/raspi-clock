@@ -8,7 +8,7 @@ class Clicker():
     def __init__(self, input_device=ClickerSettings.input_device):
         self.input_device = input_device
 
-    async def wait_for_click(self):
+    def wait_for_click(self):
         try:
             clicker = InputDevice(self.input_device)
             print("Clicker present")

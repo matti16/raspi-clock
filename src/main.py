@@ -2,7 +2,7 @@ import time
 import threading
 import schedule
 
-from raspi_clock.controllers import Alarm, RaspiClock, AlarmsChangedHandler, JoystickController
+from raspi_clock.controllers import Alarm, RaspiClock, JoystickController
 from raspi_clock.setting import AlarmSettings
 
 from watchdog.observers import Observer

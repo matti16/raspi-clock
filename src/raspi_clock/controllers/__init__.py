@@ -4,8 +4,6 @@ import time
 import threading
 import schedule
 
-from watchdog.events import FileSystemEventHandler
-
 from raspi_clock.adapters.audio import SongPlayer
 from raspi_clock.adapters.display import DisplayLCD
 from raspi_clock.adapters.button import Clicker

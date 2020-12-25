@@ -98,13 +98,12 @@ class JoystickController():
     def click_listener(self):
         self.show_alarms()
         while True:
-            z_read = self.joystick.read_z()
             # Show alarms on press
-            if z_read == 0:
+            if self.joystick.read_z() == 0:
                 self.show_alarms()
                 # If still pressed, go in edit mode
-                if z_read == 0:
-                    while z_read == 0:
+                if self.joystick.read_z() == 0:
+                    while self.joystick.read_z() == 0:
                         time.sleep(0.1)
                     self.edit_alarm()
 

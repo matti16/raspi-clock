@@ -119,9 +119,9 @@ class JoystickController():
 
 
     def _process_move(self, value_read, prev_moved):
-        if value_read > JoystickSettings.max_value * 0.8 and prev_moved < 1:
+        if value_read > JoystickSettings.max_value * 0.7 and prev_moved < 1:
             return 1
-        elif value_read < JoystickSettings.max_value * 0.2 and prev_moved > -1:
+        elif value_read < JoystickSettings.max_value * 0.3 and prev_moved > -1:
             return -1
         else:
             return 0
@@ -131,22 +131,15 @@ class JoystickController():
         current_alarm = self.clock.alarm.alarms[0] if len(self.clock.alarm.alarms) else "00:00"
         current_alarm_ints = [int(i) for i in current_alarm.split(":")]
         
+        editing = 0
         prev_moved_x, prev_moved_y = 0, 0
         self.clock.alarm.display.display_string("Set Alarm", 1)
 
         while self.joystick.read_z():
-            blink = 0
-            editing = 0
+            current_alarm_str = "->" + current_alarm if editing == 0 else current_alarm + "<-"
+            self.clock.alarm.display.display_string(current_alarm_str, 1)
+
             x_read = self.joystick.read_x()
-
-            if not blink:
-                self.clock.alarm.display.display_string(current_alarm, 2)
-                blink = 1
-            else:
-                current_alarm_show = current_alarm[editing*2 : editing*2+3]
-                self.clock.alarm.display.display_string(current_alarm_show, 2)
-                blink = 0
-
             moved_x = self._process_move(x_read, prev_moved_x)
             prev_moved_x = moved_x
             editing = (editing + moved_x) % 2
@@ -158,7 +151,6 @@ class JoystickController():
                 current_alarm_ints[editing] += moved_y
                 current_alarm = f"{current_alarm_ints[0]:02d}:{current_alarm_ints[1]:02d}"
 
-            time.sleep(0.2)
 
         json.dump([current_alarm], open(AlarmSettings.alarms_path, "w"))
         self.clock.schedule_alarms()

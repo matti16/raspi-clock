@@ -75,20 +75,6 @@ class RaspiClock():
             schedule.every().day.at(a).do(self.start_alarm)
 
 
-    def check_schedules(self):
-        while True:
-            schedule.run_pending()
-            time.sleep(1)
-
-
-    def schedule_loop(self):
-        self.schedule_thread = threading.Thread(
-            target=self.check_schedules
-        )
-        self.schedule_thread.start()
-
-
-
 class JoystickController():
 
     def __init__(self, clock):
@@ -153,16 +139,5 @@ class JoystickController():
                     current_alarm_ints[editing] = (current_alarm_ints[editing] + moved_y) % AlarmSettings.max_values[editing]
                     current_alarm = f"{current_alarm_ints[0]:02d}:{current_alarm_ints[1]:02d}"
 
-
         json.dump([current_alarm], open(AlarmSettings.alarms_path, "w"))
         self.clock.schedule_alarms()
-
-
-
-class AlarmsChangedHandler(FileSystemEventHandler):
-    def __init__(self, raspi_clock):
-        self.raspi_clock = raspi_clock
-
-    def on_modified(self, event):
-        print(f'Alarms changed! Reloading...')
-        self.raspi_clock.schedule_alarms()

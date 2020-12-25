@@ -137,9 +137,17 @@ class JoystickController():
             self.clock.alarm.display.display_string("Set Alarm", 1)
 
             while self.joystick.read_z():
-                self.clock.alarm.display.display_string(current_alarm, 2)
+                blink = 0
                 editing = 0
                 x_read = self.joystick.read_x()
+
+                if not blink:
+                    self.clock.alarm.display.display_string(current_alarm, 2)
+                    blink = 1
+                else:
+                    current_alarm_show = current_alarm[editing*2 : editing*2+3]
+                    self.clock.alarm.display.display_string(current_alarm_show, 2)
+                    blink = 0
 
                 moved_x = self._process_move(x_read, prev_moved_x)
                 prev_moved_x = moved_x
@@ -151,8 +159,10 @@ class JoystickController():
                     prev_moved_y = moved_y
                     current_alarm_ints[editing] += moved_y
                     current_alarm = f"{current_alarm_ints[0]:02d}:{current_alarm_ints[1]:02d}"
-            
-            json.dumps([current_alarm], open(AlarmSettings.alarms_path, "w"))
+
+                time.sleep(0.2)
+
+            json.dump([current_alarm], open(AlarmSettings.alarms_path, "w"))
             self.clock.schedule_alarms()
 
 

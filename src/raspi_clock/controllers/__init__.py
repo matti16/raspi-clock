@@ -88,6 +88,7 @@ class JoystickController():
                     # If still pressed, go in edit mode
                     if self.joystick.read_z() == 0:
                         self.edit_alarm()
+            time.sleep(0.1)
 
 
     def show_alarms(self):
@@ -100,9 +101,9 @@ class JoystickController():
 
 
     def _process_move(self, value_read):
-        if value_read > JoystickSettings.max_value * 0.7:
+        if value_read > JoystickSettings.max_value * 0.75:
             return 1
-        elif value_read < JoystickSettings.max_value * 0.3:
+        elif value_read < JoystickSettings.max_value * 0.25:
             return -1
         else:
             return 0

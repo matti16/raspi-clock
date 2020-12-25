@@ -14,6 +14,7 @@ class ClickerSettings(object):
 
 class AlarmSettings(object):
     alarms_path = "/home/pi/raspi-clock/alarms.json"
+    max_values = [23, 59]
 
 class JoystickSettings(object):
     z_pin = 12

@@ -150,7 +150,7 @@ class JoystickController():
                 moved_y = self._process_move(y_read)
                 if prev_moved_y != moved_y:
                     prev_moved_y = moved_y
-                    current_alarm_ints[editing] += moved_y
+                    current_alarm_ints[editing] = (current_alarm_ints[editing] + moved_y) % AlarmSettings.max_values[editing]
                     current_alarm = f"{current_alarm_ints[0]:02d}:{current_alarm_ints[1]:02d}"
 
 

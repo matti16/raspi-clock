@@ -153,8 +153,8 @@ class JoystickController():
                 editing = (editing + moved_x) % 2
 
                 if moved_x == 0:
-                    moved_y = self._process_move(y_read, prev_moved_y)
                     y_read = self.joystick.read_y()
+                    moved_y = self._process_move(y_read, prev_moved_y)
                     prev_moved_y = moved_y
                     current_alarm_ints[editing] += moved_y
                     current_alarm = f"{current_alarm_ints[0]:02d}:{current_alarm_ints[1]:02d}"

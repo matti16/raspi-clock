@@ -2,5 +2,4 @@ python-vlc
 smbus
 evdev
 schedule
-watchdog
 RPi.GPIO

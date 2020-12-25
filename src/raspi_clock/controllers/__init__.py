@@ -96,7 +96,6 @@ class JoystickController():
         self.joystick = Joystick()
     
     def click_listener(self):
-        self.show_alarms()
         while True:
             # Show alarms on press
             if self.joystick.read_z() == 0:  

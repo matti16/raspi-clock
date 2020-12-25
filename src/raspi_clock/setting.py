@@ -1,5 +1,8 @@
 import os
 
+class DispalySettings(object):
+    num_chars = 16
+
 class AudioSettings(object):
     file_path = "/home/pi/media/audio/thunderstruck_acdc.mp3"
 
@@ -16,4 +19,8 @@ class JoystickSettings(object):
     z_pin = 12
     y_adc = 0
     x_adc = 1
+
+    max_value = 254
+
+    press_seconds = 1.5
 

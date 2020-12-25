@@ -136,7 +136,7 @@ class JoystickController():
             time.sleep(0.1)
 
         while self.joystick.read_z():
-            current_alarm_str = f"->{current_alarm}  " if editing == 0 else "  {current_alarm}<-"
+            current_alarm_str = f"->{current_alarm}  " if editing == 0 else f"  {current_alarm}<-"
             self.clock.alarm.display.display_string(current_alarm_str, 2)
 
             x_read = self.joystick.read_x()

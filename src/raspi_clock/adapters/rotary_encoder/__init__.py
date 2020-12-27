@@ -19,4 +19,4 @@ class RotaryEncoder():
         return self.adc.analogRead(self.rotary_adc)
 
     def read_rotation_perc(self):
-        return self.read_rotation() / RotaryEncoderSettings.max_value
+        return self.read_rotation() / (RotaryEncoderSettings.max_value + 2)

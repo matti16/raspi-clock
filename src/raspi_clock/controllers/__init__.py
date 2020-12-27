@@ -133,3 +133,4 @@ class JoystickController():
 
         json.dump([current_alarm], open(AlarmSettings.alarms_path, "w"))
         self.clock.schedule_alarms()
+        self.clock.show_alarms()

@@ -101,7 +101,6 @@ class JoystickController():
         time.sleep(JoystickSettings.press_seconds)
 
 
-
     def edit_alarm(self):
         current_alarm = self.clock.alarm.alarms[0] if len(self.clock.alarm.alarms) else "00:00"
         current_alarm_ints = [int(i) for i in current_alarm.split(":")]
@@ -133,4 +132,4 @@ class JoystickController():
 
         json.dump([current_alarm], open(AlarmSettings.alarms_path, "w"))
         self.clock.schedule_alarms()
-        self.clock.show_alarms()
+        self.show_alarms()

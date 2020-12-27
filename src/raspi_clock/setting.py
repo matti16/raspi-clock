@@ -20,8 +20,12 @@ class JoystickSettings(object):
     z_pin = 12
     y_adc = 0
     x_adc = 1
-
     max_value = 254
+    press_seconds = 1.5
 
+class RotaryEncoderSettings(object):
+    rotary_adc = 0
+    button_pin = 12
+    max_value = 254
     press_seconds = 1.5
 

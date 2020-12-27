@@ -1,4 +1,4 @@
-from raspi_clock.adapters.display.i2c_driver import LCD
+from raspi_clock.adapters.drivers.i2c_driver import LCD
 from raspi_clock.setting import DispalySettings
 
 class DisplayLCD():

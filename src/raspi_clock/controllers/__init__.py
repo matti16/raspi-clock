@@ -8,6 +8,7 @@ from raspi_clock.adapters.audio import SongPlayer
 from raspi_clock.adapters.display import DisplayLCD
 from raspi_clock.adapters.button import Clicker
 from raspi_clock.adapters.joystick import Joystick
+from raspi_clock.adapters.rotary_encoder import RotaryEncoder
 
 from raspi_clock.setting import AlarmSettings
 from raspi_clock.setting import JoystickSettings
@@ -77,16 +78,16 @@ class JoystickController():
 
     def __init__(self, clock):
         self.clock = clock
-        self.joystick = Joystick()
+        self.rotary_enc = RotaryEncoder()
     
     def click_listener(self):
         while True:
             # Show alarms on press
-            if self.joystick.read_z() == 0:  
+            if self.rotary_enc.read_button():  
                 with self.clock.lock:
                     self.show_alarms()
                     # If still pressed, go in edit mode
-                    if self.joystick.read_z() == 0:
+                    if self.rotary_enc.read_button():
                         self.edit_alarm()
             time.sleep(0.1)
 
@@ -100,43 +101,33 @@ class JoystickController():
         time.sleep(JoystickSettings.press_seconds)
 
 
-    def _process_move(self, value_read):
-        if value_read > JoystickSettings.max_value * 0.75:
-            return 1
-        elif value_read < JoystickSettings.max_value * 0.25:
-            return -1
-        else:
-            return 0
-
 
     def edit_alarm(self):
         current_alarm = self.clock.alarm.alarms[0] if len(self.clock.alarm.alarms) else "00:00"
         current_alarm_ints = [int(i) for i in current_alarm.split(":")]
         
-        editing = 0
-        prev_moved_x, prev_moved_y = 0, 0
         self.clock.alarm.display.display_string("Set Alarm", 1)
         self.clock.alarm.display.display_string(current_alarm, 2)
-        while self.joystick.read_z() == 0:
+        while self.rotary_enc.read_button():
             time.sleep(0.1)
 
-        while self.joystick.read_z():
-            current_alarm_str = f"->{current_alarm}  " if editing == 0 else f"  {current_alarm}<-"
+        # Set Hours
+        while self.rotary_enc.read_button() == 0:
+            current_alarm_str = f"->{current_alarm}  "
             self.clock.alarm.display.display_string(current_alarm_str, 2)
+            rotatation = self.rotary_enc.read_rotation()
+            hours = int(rotatation / AlarmSettings.max_values[0])
+            current_alarm_ints[0] = hours
+            current_alarm = f"{current_alarm_ints[0]:02d}:{current_alarm_ints[1]:02d}"
 
-            x_read = self.joystick.read_x()
-            moved_x = self._process_move(x_read)
-            if prev_moved_x != moved_x:
-                editing = (editing + moved_x) % 2
-                prev_moved_x = moved_x
-
-            if moved_x == 0:
-                y_read = self.joystick.read_y()
-                moved_y = self._process_move(y_read)
-                if prev_moved_y != moved_y:
-                    prev_moved_y = moved_y
-                    current_alarm_ints[editing] = (current_alarm_ints[editing] + moved_y) % AlarmSettings.max_values[editing]
-                    current_alarm = f"{current_alarm_ints[0]:02d}:{current_alarm_ints[1]:02d}"
+        # Set Minutes
+        while self.rotary_enc.read_button() == 0:
+            current_alarm_str = f"  {current_alarm}<-"
+            self.clock.alarm.display.display_string(current_alarm_str, 2)
+            rotatation = self.rotary_enc.read_rotation()
+            minutes = int(rotatation / AlarmSettings.max_values[1])
+            current_alarm_ints[1] = minutes
+            current_alarm = f"{current_alarm_ints[0]:02d}:{current_alarm_ints[1]:02d}"
 
         json.dump([current_alarm], open(AlarmSettings.alarms_path, "w"))
         self.clock.schedule_alarms()

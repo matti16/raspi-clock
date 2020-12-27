@@ -1,6 +1,6 @@
 import RPi.GPIO as GPIO
 
-from raspi_clock.adapters.joystick.adc_device import ADCDevice, ADS7830
+from raspi_clock.adapters.drivers.adc_device import ADS7830
 from raspi_clock.setting import JoystickSettings
 
 

@@ -117,7 +117,7 @@ class JoystickController():
             self.clock.alarm.display.display_string(current_alarm_str, 2)
             rotatation_perc = self.rotary_enc.read_rotation_perc()
             hours = int( rotatation_perc * AlarmSettings.max_values[0] )
-            current_alarm_ints[0] = hours
+            current_alarm_ints[0] = hours % AlarmSettings.max_values[0]
             current_alarm = f"{current_alarm_ints[0]:02d}:{current_alarm_ints[1]:02d}"
 
         # Set Minutes
@@ -128,7 +128,7 @@ class JoystickController():
             self.clock.alarm.display.display_string(current_alarm_str, 2)
             rotatation_perc = self.rotary_enc.read_rotation_perc()
             minutes = int( rotatation_perc * AlarmSettings.max_values[1] )
-            current_alarm_ints[1] = minutes
+            current_alarm_ints[1] = minutes % AlarmSettings.max_values[1]
             current_alarm = f"{current_alarm_ints[0]:02d}:{current_alarm_ints[1]:02d}"
 
         json.dump([current_alarm], open(AlarmSettings.alarms_path, "w"))

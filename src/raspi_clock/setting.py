@@ -5,6 +5,8 @@ from PIL import ImageFont
 BASE_PATH = os.path.join(os.path.realpath(__file__), "..")
 RESOURCES_PATH = os.path.join(BASE_PATH, "resources")
 
+print("BASE PATH: ", BASE_PATH)
+
 class DispalySettings(object):
     PORT = 1
     ADDRESS = 0x3C
@@ -23,12 +25,12 @@ class DispalySettings(object):
 
     HOURS_TEXT_POS = (47, 22)
     HOURS_FONT = ImageFont.truetype(
-        os.path.join(RESOURCES_PATH, "media", "LeagueGothic-Regular.otf"), 25
+        os.path.join(RESOURCES_PATH, "font", "LeagueGothic-Regular.otf"), 25
     )
 
     DATE_TEXT_POS = (45, 49)
     DATE_FONT = ImageFont.truetype(
-        os.path.join(RESOURCES_PATH, "media", "LeagueGothic-Regular.otf"), 15
+        os.path.join(RESOURCES_PATH, "font", "LeagueGothic-Regular.otf"), 15
     )
 class AudioSettings(object):
     FILE_PATH = os.path.join(RESOURCES_PATH, "media", "Queen-Dont_Stop_Me_Now.mp3")

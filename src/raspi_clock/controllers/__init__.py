@@ -105,28 +105,28 @@ class RotaryController():
         self.clock.alarm.display.display_string("Set Alarm", 1)
         self.clock.alarm.display.display_string(current_alarm, 2)
 
-        # Set Hours
-        while self.rotary_enc.read_button():
-            time.sleep(0.1)
-        while self.rotary_enc.read_button() == 0:
-            current_alarm_str = f"->{current_alarm}  "
-            self.clock.alarm.display.display_string(current_alarm_str, 2)
-            rotatation_perc = self.rotary_enc.read_rotation_perc()
-            hours = int( rotatation_perc * AlarmSettings.MAX_VALUES[0] )
-            current_alarm_ints[0] = hours % AlarmSettings.MAX_VALUES[0]
-            current_alarm = f"{current_alarm_ints[0]:02d}:{current_alarm_ints[1]:02d}"
+        # # Set Hours
+        # while self.rotary_enc.read_button():
+        #     time.sleep(0.1)
+        # while self.rotary_enc.read_button() == 0:
+        #     current_alarm_str = f"->{current_alarm}  "
+        #     self.clock.alarm.display.display_string(current_alarm_str, 2)
+        #     rotatation_perc = self.rotary_enc.read_rotation_perc()
+        #     hours = int( rotatation_perc * AlarmSettings.MAX_VALUES[0] )
+        #     current_alarm_ints[0] = hours % AlarmSettings.MAX_VALUES[0]
+        #     current_alarm = f"{current_alarm_ints[0]:02d}:{current_alarm_ints[1]:02d}"
 
-        # Set Minutes
-        while self.rotary_enc.read_button():
-            time.sleep(0.1)
-        while self.rotary_enc.read_button() == 0:
-            current_alarm_str = f"  {current_alarm}<-"
-            self.clock.alarm.display.display_string(current_alarm_str, 2)
-            rotatation_perc = self.rotary_enc.read_rotation_perc()
-            minutes = int( rotatation_perc * AlarmSettings.MAX_VALUES[1] )
-            current_alarm_ints[1] = minutes % AlarmSettings.MAX_VALUES[1]
-            current_alarm = f"{current_alarm_ints[0]:02d}:{current_alarm_ints[1]:02d}"
+        # # Set Minutes
+        # while self.rotary_enc.read_button():
+        #     time.sleep(0.1)
+        # while self.rotary_enc.read_button() == 0:
+        #     current_alarm_str = f"  {current_alarm}<-"
+        #     self.clock.alarm.display.display_string(current_alarm_str, 2)
+        #     rotatation_perc = self.rotary_enc.read_rotation_perc()
+        #     minutes = int( rotatation_perc * AlarmSettings.MAX_VALUES[1] )
+        #     current_alarm_ints[1] = minutes % AlarmSettings.MAX_VALUES[1]
+        #     current_alarm = f"{current_alarm_ints[0]:02d}:{current_alarm_ints[1]:02d}"
 
-        json.dump([current_alarm], open(AlarmSettings.ALARMS_PATH, "w"))
-        self.clock.schedule_alarms()
-        self.show_alarms()
+        # json.dump([current_alarm], open(AlarmSettings.ALARMS_PATH, "w"))
+        # self.clock.schedule_alarms()
+        # self.show_alarms()

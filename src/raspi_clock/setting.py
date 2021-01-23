@@ -2,7 +2,7 @@ import os
 
 from PIL import ImageFont
 
-BASE_PATH = os.path.join(os.path.realpath(__file__), "..")
+BASE_PATH = os.path.join(os.path.dirname(__file__), "..", "..")
 RESOURCES_PATH = os.path.join(BASE_PATH, "resources")
 
 print("BASE PATH: ", BASE_PATH)

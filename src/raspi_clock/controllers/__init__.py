@@ -5,25 +5,23 @@ import threading
 import schedule
 
 from raspi_clock.adapters.audio import SongPlayer
-from raspi_clock.adapters.display import DisplayLCD
+from raspi_clock.adapters.display import OLEDDisplay
 from raspi_clock.adapters.button import Clicker
-from raspi_clock.adapters.joystick import Joystick
 from raspi_clock.adapters.rotary_encoder import RotaryEncoder
 
-from raspi_clock.setting import AlarmSettings
-from raspi_clock.setting import JoystickSettings
+from raspi_clock.setting import AlarmSettings, RotaryEncoderSettings
 
 class Alarm():
 
     def __init__(self):
         self.player = SongPlayer()
         self.clicker = Clicker()
-        self.display = DisplayLCD()
+        self.display = OLEDDisplay()
 
 
     def read_alarms(self):
         try:
-            self.alarms = json.load(open(AlarmSettings.alarms_path))
+            self.alarms = json.load(open(AlarmSettings.ALARMS_PATH))
             print(f"Loaded {self.alarms}")
         except Exception as e:
             self.alarms = []
@@ -34,14 +32,13 @@ class Alarm():
     def show_current_time(self, lock):
         while True:
             with lock:
-                self.display.display_string(time.strftime('%H:%M:%S'), 1)
-                self.display.display_string(time.strftime('%d %b %Y'), 2)
-            time.sleep(0.1)
+                self.display.show_sun_moon_clock()
+            time.sleep(1)
     
 
     def start_alarm(self, lock):
         with lock:
-            self.display.display_string("SVEGLIA!!!!!", 2)
+            self.display.show_alarm()
             print("Staring alarm..")
             self.player.play()
             print("Waiting for click..")
@@ -74,7 +71,7 @@ class RaspiClock():
             schedule.every().day.at(a).do(self.start_alarm)
 
 
-class JoystickController():
+class RotaryController():
 
     def __init__(self, clock):
         self.clock = clock
@@ -98,7 +95,7 @@ class JoystickController():
             self.clock.alarm.display.display_string(self.clock.alarm.alarms[0], 2)
         else:
             self.clock.alarm.display.display_string("No Alarms Set", 1)
-        time.sleep(JoystickSettings.press_seconds)
+        time.sleep(RotaryEncoderSettings.PRESS_SECONDS)
 
 
     def edit_alarm(self):
@@ -115,8 +112,8 @@ class JoystickController():
             current_alarm_str = f"->{current_alarm}  "
             self.clock.alarm.display.display_string(current_alarm_str, 2)
             rotatation_perc = self.rotary_enc.read_rotation_perc()
-            hours = int( rotatation_perc * AlarmSettings.max_values[0] )
-            current_alarm_ints[0] = hours % AlarmSettings.max_values[0]
+            hours = int( rotatation_perc * AlarmSettings.MAX_VALUES[0] )
+            current_alarm_ints[0] = hours % AlarmSettings.MAX_VALUES[0]
             current_alarm = f"{current_alarm_ints[0]:02d}:{current_alarm_ints[1]:02d}"
 
         # Set Minutes
@@ -126,10 +123,10 @@ class JoystickController():
             current_alarm_str = f"  {current_alarm}<-"
             self.clock.alarm.display.display_string(current_alarm_str, 2)
             rotatation_perc = self.rotary_enc.read_rotation_perc()
-            minutes = int( rotatation_perc * AlarmSettings.max_values[1] )
-            current_alarm_ints[1] = minutes % AlarmSettings.max_values[1]
+            minutes = int( rotatation_perc * AlarmSettings.MAX_VALUES[1] )
+            current_alarm_ints[1] = minutes % AlarmSettings.MAX_VALUES[1]
             current_alarm = f"{current_alarm_ints[0]:02d}:{current_alarm_ints[1]:02d}"
 
-        json.dump([current_alarm], open(AlarmSettings.alarms_path, "w"))
+        json.dump([current_alarm], open(AlarmSettings.ALARMS_PATH, "w"))
         self.clock.schedule_alarms()
         self.show_alarms()

@@ -1,31 +1,50 @@
 import os
 
-class DispalySettings(object):
-    num_chars = 16
+from PIL import ImageFont
 
+BASE_PATH = os.path.join(os.path.realpath(__file__), "..")
+RESOURCES_PATH = os.path.join(BASE_PATH, "resources")
+
+class DispalySettings(object):
+    PORT = 1
+    ADDRESS = 0x3C
+
+    SUN_RADIUS = 5
+    RAY_SUN_MARGIN = 2
+    RAY_WIDTH = 5
+    RAY_HEIGHT = 5
+    ANGLED_RAYS_SCALE = 0.7
+
+    MOON_RADIUS = 8
+    MOON_SHIFT = 6
+
+    SUNRISE = 6
+    SUNSET = 18
+
+    HOURS_TEXT_POS = (47, 22)
+    HOURS_FONT = ImageFont.truetype(
+        os.path.join(RESOURCES_PATH, "media", "LeagueGothic-Regular.otf"), 25
+    )
+
+    DATE_TEXT_POS = (45, 49)
+    DATE_FONT = ImageFont.truetype(
+        os.path.join(RESOURCES_PATH, "media", "LeagueGothic-Regular.otf"), 15
+    )
 class AudioSettings(object):
-    file_path = "/home/pi/media/audio/thunderstruck_acdc.mp3"
+    FILE_PATH = os.path.join(RESOURCES_PATH, "media", "Queen-Dont_Stop_Me_Now.mp3")
 
 class ClickerSettings(object):
-    input_device = "/dev/input/event1"
-    ev_val_pressed = 1
-    ev_vaL_released = 0
-    btn_code = 115
+    INPUT_DEVICE = "/dev/input/event1"
+    EV_VAL_PRESSEC = 1
+    EV_VALRELEASED = 0
+    BTN_CODE = 115
 
 class AlarmSettings(object):
-    alarms_path = "/home/pi/raspi-clock/alarms.json"
-    max_values = [24, 60]
-
-class JoystickSettings(object):
-    z_pin = 12
-    y_adc = 0
-    x_adc = 1
-    max_value = 254
-    press_seconds = 1.5
+    ALARMS_PATH = os.path.join(BASE_PATH, "alarms.json")
+    MAX_VALUES = [24, 60]
 
 class RotaryEncoderSettings(object):
-    rotary_adc = 0
-    button_pin = 12
-    max_value = 254
-    press_seconds = 1.5
+    BUTTON_PIN = 12
+    MAX_VALUE = 254
+    PRESS_SECONDS = 1.5
 

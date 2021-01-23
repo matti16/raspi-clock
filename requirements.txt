@@ -3,3 +3,4 @@ smbus
 evdev
 schedule
 RPi.GPIO
+luma.oled

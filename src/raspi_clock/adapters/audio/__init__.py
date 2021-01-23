@@ -4,7 +4,7 @@ from raspi_clock.setting import AudioSettings
 
 class SongPlayer():
 
-    def __init__(self, filepath=AudioSettings.file_path):
+    def __init__(self, filepath=AudioSettings.FILE_PATH):
         self.filepath = filepath
         self.player = vlc.MediaPlayer(filepath)
     

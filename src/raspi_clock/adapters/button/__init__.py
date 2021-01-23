@@ -5,7 +5,7 @@ from raspi_clock.setting import ClickerSettings
 
 class Clicker():
 
-    def __init__(self, input_device=ClickerSettings.input_device):
+    def __init__(self, input_device=ClickerSettings.INPUT_DEVICE):
         self.input_device = input_device
 
     def wait_for_click(self):

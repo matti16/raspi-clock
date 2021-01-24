@@ -77,27 +77,20 @@ class RotaryController():
         self.clock = clock
         self.display = clock.alarm.display
         self.rotary_enc = RotaryEncoder()
-    
+ 
     def click_listener(self):
         while True:
             # Show alarms on press
-            if self.rotary_enc.read_button() == 0:  
+            if self.rotary_enc.read_button() == 0:
                 with self.clock.lock:
                     self.edit_settings()
             time.sleep(0.1)
-
 
     def edit_settings(self):
         selected_idx = 0
         self.display.show_menu(MenuSettings.OPTIONS, selected_idx)
 
         while self.rotary_enc.read_button() != 0:
-            clkState = GPIO.input(clk)
-            dtState = GPIO.input(dt)
-
-            if clkState == 1 and dtState == 0:
-                selected_idx -= 1
-            elif clkState == 0 and dtState == 1:
-                selected_idx += 1
-            
+            rotation = self.rotary_enc.read_rotation()
+            selected_idx += rotation
             self.display.show_menu(MenuSettings.OPTIONS, selected_idx)

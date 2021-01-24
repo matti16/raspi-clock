@@ -2,6 +2,7 @@ import RPi.GPIO as GPIO
 
 from raspi_clock.setting import RotaryEncoderSettings
 
+
 class RotaryEncoder():
     def __init__(self):
         self.switch = RotaryEncoderSettings.SW_PIN
@@ -15,3 +16,14 @@ class RotaryEncoder():
 
     def read_button(self):
         return GPIO.input(self.switch)
+
+    def read_rotation(self):
+        clkState = GPIO.input(self.clk)
+        dtState = GPIO.input(self.dt)
+        if clkState == 1 and dtState == 0:
+            rotation = -1
+        elif clkState == 0 and dtState == 1:
+            rotation = 1
+        else:
+            rotation = 0
+        return rotation

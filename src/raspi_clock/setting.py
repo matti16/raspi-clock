@@ -53,7 +53,7 @@ class RotaryEncoderSettings(object):
 
 
 class MenuSettings(object):
-    MENU_OPTIONS = [
+    OPTIONS = [
         "Alarm"
         "Timezone"
         "Exit"

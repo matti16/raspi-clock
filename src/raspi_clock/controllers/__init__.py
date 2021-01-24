@@ -14,9 +14,9 @@ from raspi_clock.setting import AlarmSettings, RotaryEncoderSettings, MenuSettin
 class Alarm():
 
     def __init__(self):
-        self.player = SongPlayer()
-        self.clicker = Clicker()
         self.display = OLEDDisplay()
+        self.clicker = Clicker()
+        self.player = SongPlayer()
 
 
     def read_alarms(self):
@@ -75,12 +75,12 @@ class RotaryController():
 
     def __init__(self, clock):
         self.clock = clock
+        self.display = clock.alarm.display
         self.rotary_enc = RotaryEncoder()
     
     def click_listener(self):
         while True:
             # Show alarms on press
-            print(self.rotary_enc.read_button())
             if self.rotary_enc.read_button() == 0:  
                 with self.clock.lock:
                     self.edit_settings()
@@ -89,7 +89,7 @@ class RotaryController():
 
     def edit_settings(self):
         selected_idx = 0
-        self.clock.display.show_menu(MenuSettings.OPTIONS, selected_idx)
+        self.display.show_menu(MenuSettings.OPTIONS, selected_idx)
 
         while self.rotary_enc.read_button() != 0:
             clkState = GPIO.input(clk)
@@ -100,4 +100,4 @@ class RotaryController():
             elif clkState == 0 and dtState == 1:
                 selected_idx += 1
             
-            self.clock.display.show_menu(MenuSettings.OPTIONS, selected_idx)
+            self.display.show_menu(MenuSettings.OPTIONS, selected_idx)

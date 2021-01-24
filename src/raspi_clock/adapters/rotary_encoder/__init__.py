@@ -5,6 +5,8 @@ from raspi_clock.setting import RotaryEncoderSettings
 
 class RotaryEncoder():
     def __init__(self):
+        self.rotation = 0
+
         self.switch = RotaryEncoderSettings.SW_PIN
         self.clk = RotaryEncoderSettings.CLK_PIN
         self.dt = RotaryEncoderSettings.DT_PIN
@@ -14,16 +16,24 @@ class RotaryEncoder():
         GPIO.setup(RotaryEncoderSettings.DT_PIN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
         GPIO.setup(RotaryEncoderSettings.SW_PIN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
-    def read_button(self):
-        return GPIO.input(self.switch)
-
-    def read_rotation(self):
+    def setup_interrupt(self):
+        GPIO.add_event_detect(clk, GPIO.FALLING, callback=self.clk_clicked, bouncetime=100)
+        GPIO.add_event_detect(dt, GPIO.FALLING, callback=self.dt_clicked, bouncetime=100)
+    
+    def dt_clicked(channel):
         clkState = GPIO.input(self.clk)
         dtState = GPIO.input(self.dt)
         if clkState == 1 and dtState == 0:
-            rotation = -1
-        elif clkState == 0 and dtState == 1:
-            rotation = 1
-        else:
-            rotation = 0
-        return rotation
+            self.rotation = self.rotation - 1
+    
+    def clk_clicked(channel):
+        clkState = GPIO.input(self.clk)
+        dtState = GPIO.input(self.dt)
+        if clkState == 0 and dtState == 1:
+            self.rotation = self.rotation + 1
+
+    def read_button(self):
+        return GPIO.input(self.switch)
+    
+    def reset_status(self):
+        self.rotation = 0  

@@ -77,6 +77,7 @@ class RotaryController():
         self.clock = clock
         self.display = clock.alarm.display
         self.rotary_enc = RotaryEncoder()
+        self.rotary_enc.setup_interrupt()
  
     def click_listener(self):
         while True:
@@ -87,9 +88,9 @@ class RotaryController():
             time.sleep(0.1)
 
     def edit_settings(self):
-        selected_idx = 0
+        self.rotary_enc.reset_status()
 
         while self.rotary_enc.read_button() != 0:
-            rotation = self.rotary_enc.read_rotation()
-            selected_idx = (selected_idx + rotation) % len(MenuSettings.OPTIONS)
+            rotation = self.rotary_enc.rotation
+            selected_idx = rotation % len(MenuSettings.OPTIONS)
             self.display.show_menu(MenuSettings.OPTIONS, selected_idx)

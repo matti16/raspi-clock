@@ -96,4 +96,4 @@ class RotaryController():
             print(MenuSettings.OPTIONS, selected_idx)
             self.display.show_menu(MenuSettings.OPTIONS, selected_idx)
 
-            time.sleep(0.1)
+            time.sleep(0.01)

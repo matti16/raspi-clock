@@ -48,7 +48,7 @@ class AlarmSettings(object):
 class RotaryEncoderSettings(object):
     CLK_PIN = 20
     DT_PIN = 12
-    SWITCH_PIN = 13
+    SW_PIN = 13
     PRESS_SECONDS = 1.5
 
 

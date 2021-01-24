@@ -24,7 +24,7 @@ class Alarm():
             settings = json.load(open(AlarmSettings.SETTINGS_PATH))
             print(f"Loaded {settings}")
             self.alarm = settings.get("alarm", "")
-            self.timezone = settings.get("alarm", "GMT")
+            self.timezone = settings.get("timezone", "GMT")
 
         except Exception as e:
             self.alarm = ""

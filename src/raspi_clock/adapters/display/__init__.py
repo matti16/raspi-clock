@@ -96,7 +96,7 @@ class OLEDDisplay():
             draw.text((50, 25), "SVEGLIA!!!!!", fill="white")
 
     
-    def show_menu(options, current):
+    def show_menu(self, options, current):
         with canvas(self.device) as draw:
             draw.text((10, 5), "Settings", font=DisplaySettings.MENU_TITLE_FONT, fill="white")
 

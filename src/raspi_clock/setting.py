@@ -23,7 +23,7 @@ class DisplaySettings(object):
     SUNRISE = 6
     SUNSET = 18
 
-    HOURS_TEXT_POS = (46, 22)
+    HOURS_TEXT_POS = (45, 21)
     HOURS_FONT = ImageFont.truetype(os.path.join(RESOURCES_PATH, "font", "LeagueGothic-Regular.otf"), 27)
 
     DATE_TEXT_POS = (45, 49)

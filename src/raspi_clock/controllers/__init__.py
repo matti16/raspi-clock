@@ -69,8 +69,9 @@ class RaspiClock():
     def load_settings(self):
         self.alarm.read_settings()
         schedule.clear()
-        print(f"Scheduling alarm at {self.alarm.alarm} {self.alarm.timezone}")
-        schedule.every().day.at(a).do(self.start_alarm)
+        if self.alarm.alarm:
+            print(f"Scheduling alarm at {self.alarm.alarm} {self.alarm.timezone}")
+            schedule.every().day.at(self.alarm.alarm).do(self.start_alarm)
 
 
 class RotaryController():

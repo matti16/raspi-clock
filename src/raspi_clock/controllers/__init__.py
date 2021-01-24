@@ -74,6 +74,7 @@ class RaspiClock():
         if self.alarm.alarm:
             tz = datetime.datetime.now(tz=pytz.timezone(self.alarm.timezone)).tzinfo
             a = datetime.datetime.strptime(self.alarm.alarm, "%H:%M").replace(tzinfo=tz).astimezone(pytz.utc)
+            a = a.strftime("%H:%M")
             print(f"Scheduling alarm at {self.alarm.alarm} {self.alarm.timezone} ({a} UTC)")
             schedule.every().day.at(a).do(self.start_alarm)
 

@@ -53,6 +53,7 @@ class RaspiClock():
     
     def __init__(self):
         self.alarm = Alarm()
+        self.alarm.read_settings()
         self.lock = threading.Lock()
 
     def start_display_time_thread(self):

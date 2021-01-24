@@ -60,7 +60,7 @@ GPIO.add_event_detect(clk, GPIO.FALLING, callback=clkClicked, bouncetime=100)
 GPIO.add_event_detect(dt, GPIO.FALLING, callback=dtClicked, bouncetime=100)
 
 while True:
-    print(GPIO.input(sw))
+    print(GPIO.input(sw), GPIO.input(clk), GPIO.input(dt))
     time.sleep(0.1)
     
 GPIO.cleanup()

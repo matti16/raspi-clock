@@ -7,7 +7,7 @@ RESOURCES_PATH = os.path.join(BASE_PATH, "resources")
 
 print("BASE PATH: ", BASE_PATH)
 
-class DispalySettings(object):
+class DisplaySettings(object):
     PORT = 1
     ADDRESS = 0x3C
 
@@ -30,7 +30,7 @@ class DispalySettings(object):
     DATE_FONT = ImageFont.truetype(os.path.join(RESOURCES_PATH, "font", "LeagueGothic-Regular.otf"), 15)
 
     MENU_TITLE_FONT = ImageFont.truetype(os.path.join(RESOURCES_PATH, "font", "LeagueGothic-Regular.otf"), 25)
-    MENU_OPTION_FONT = ImageFont.truetype(os.path.join(RESOURCES_PATH, "font", "LeagueGothic-Regular.otf"), 20)
+    MENU_OPTIONS_FONT = ImageFont.truetype(os.path.join(RESOURCES_PATH, "font", "LeagueGothic-Regular.otf"), 20)
 
 class AudioSettings(object):
     FILE_PATH = os.path.join(RESOURCES_PATH, "media", "Queen-Dont_Stop_Me_Now.mp3")

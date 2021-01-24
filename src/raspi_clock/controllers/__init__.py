@@ -1,5 +1,6 @@
 import json
 import time
+import datetime
 
 import threading
 import schedule
@@ -70,8 +71,10 @@ class RaspiClock():
         self.alarm.read_settings()
         schedule.clear()
         if self.alarm.alarm:
-            print(f"Scheduling alarm at {self.alarm.alarm} {self.alarm.timezone}")
-            schedule.every().day.at(self.alarm.alarm).do(self.start_alarm)
+            tz = datetime.datetime.now(tz=pytz.timezone(self.alarm.timezone)).tzinfo
+            a = datetime.datetime.strptime(self.alarm.alarm, "%H:%M").replace(tzinfo=tz).astimezone(pytz.utc)
+            print(f"Scheduling alarm at {self.alarm.alarm} {self.alarm.timezone} ({a} UTC)")
+            schedule.every().day.at(a).do(self.start_alarm)
 
 
 class RotaryController():

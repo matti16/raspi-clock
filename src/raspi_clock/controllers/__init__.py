@@ -33,7 +33,7 @@ class Alarm():
         while True:
             with lock:
                 self.display.show_sun_moon_clock()
-            time.sleep(1)
+            time.sleep(0.1)
     
 
     def start_alarm(self, lock):

@@ -13,12 +13,9 @@ class Main():
     
     def start(self):
         self.alarm_clock.start_display_time_thread()
-        self.alarm_clock.schedule_alarms()
+        self.alarm_clock.load_settings()
         threading.Thread(target=self.rotary_controller.click_listener).start()
     
-    def reload_alarms(self):
-        self.alarm_clock.schedule_alarms()
-
 
 if __name__ == "__main__":
     main = Main()

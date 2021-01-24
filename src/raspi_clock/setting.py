@@ -42,7 +42,7 @@ class ClickerSettings(object):
     BTN_CODE = 115
 
 class AlarmSettings(object):
-    ALARMS_PATH = os.path.join(BASE_PATH, "alarms.json")
+    SETTINGS_PATH = os.path.join(BASE_PATH, "settings.json")
     MAX_VALUES = [24, 60]
 
 class RotaryEncoderSettings(object):

@@ -1,5 +1,6 @@
 import time
 import datetime
+import pytz
 
 from luma.core.interface.serial import i2c
 from luma.oled.device import sh1106
@@ -72,9 +73,9 @@ class OLEDDisplay():
         return sun_x_position, moon_x_position
 
 
-    def show_sun_moon_clock(self):
+    def show_sun_moon_clock(self, timezone):
         with canvas(self.device) as draw:
-            now = datetime.datetime.now()
+            now = datetime.datetime.now(tz=pytz.timezone(timezone))
             today_date = now.strftime("%d - %m - %y")
 
             hours = now.hour

@@ -19,20 +19,23 @@ class Alarm():
         self.player = SongPlayer()
 
 
-    def read_alarms(self):
+    def read_settings(self):
         try:
-            self.alarms = json.load(open(AlarmSettings.ALARMS_PATH))
-            print(f"Loaded {self.alarms}")
+            settings = json.load(open(AlarmSettings.SETTINGS_PATH))
+            print(f"Loaded {settings}")
+            self.alarm = settings.get("alarm", "")
+            self.timezone = settings.get("alarm", "GMT")
+
         except Exception as e:
-            self.alarms = []
+            self.alarm = ""
+            self.timezone = "GMT"
             print(e)
-        return self.alarms
 
     
     def show_current_time(self, lock):
         while True:
             with lock:
-                self.display.show_sun_moon_clock()
+                self.display.show_sun_moon_clock(self.timezone)
             time.sleep(0.1)
     
 
@@ -63,12 +66,11 @@ class RaspiClock():
         self.alarm.start_alarm(self.lock)
 
 
-    def schedule_alarms(self):
-        alarms = self.alarm.read_alarms()
+    def load_settings(self):
+        self.alarm.read_settings()
         schedule.clear()
-        for a in alarms:
-            print(f"Scheduling alarm at {a}")
-            schedule.every().day.at(a).do(self.start_alarm)
+        print(f"Scheduling alarm at {self.alarm.alarm} {self.alarm.timezone}")
+        schedule.every().day.at(a).do(self.start_alarm)
 
 
 class RotaryController():

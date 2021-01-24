@@ -101,13 +101,16 @@ class OLEDDisplay():
             middle_y = self.device.height/2
 
             draw.text((0, middle_y-DisplaySettings.MENU_TITLE_FONT.size/2), "Settings", font=DisplaySettings.MENU_TITLE_FONT, fill="white")
-            draw.polygon([(60, middle_y-5), (70, middle_y), (60, middle_y+5)], fill="white", outline="white")
+            draw.polygon([(58, middle_y-5), (66, middle_y), (60, middle_y+5)], fill="white", outline="white")
 
             draw.text(
-                (75, middle_y), options[current], 
+                (75, middle_y-DisplaySettings.MENU_OPTIONS_FONT.size/2), options[current], 
                 font=DisplaySettings.MENU_OPTIONS_FONT, fill="white"
             )
             if current > 0:
-                draw.text((75, 10), options[current-1], font=DisplaySettings.MENU_OPTIONS_FONT, fill="white")
+                draw.text(
+                    (75, 0), options[current-1], 
+                    font=DisplaySettings.MENU_OPTIONS_FONT, fill="white"
+                )
             if current < len(options) - 1:
                 draw.text((75, 50), options[current+1], font=DisplaySettings.MENU_OPTIONS_FONT, fill="white")

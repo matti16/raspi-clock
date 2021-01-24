@@ -13,7 +13,7 @@ class OLEDDisplay():
         serial = i2c(port=1, address=0x3C)
         self.device = sh1106(serial)
         with canvas(self.device) as draw:
-            draw.text((15, 35), "Loading...", font=DisplaySettings.MENU_OPTIONS_FONT, fill="white")
+            draw.text((30, 25), "Loading...", font=DisplaySettings.MENU_OPTIONS_FONT, fill="white")
 
         
     def draw_moon(self, draw, cx, cy):
@@ -98,10 +98,10 @@ class OLEDDisplay():
     
     def show_menu(self, options, current):
         with canvas(self.device) as draw:
-            draw.text((10, 5), "Settings", font=DisplaySettings.MENU_TITLE_FONT, fill="white")
+            draw.text((20, 5), "Settings", font=DisplaySettings.MENU_TITLE_FONT, fill="white")
 
-            draw.text((15, 35), options[current], font=DisplaySettings.MENU_OPTIONS_FONT, fill="white")
-            draw.polygon([(5, 25), (12, 30), (5, 35)], fill="white", outline="white")
+            draw.text((25, 35), options[current], font=DisplaySettings.MENU_OPTIONS_FONT, fill="white")
+            draw.polygon([(10, 30), (22, 35), (10, 30)], fill="white", outline="white")
 
             if current > 0:
                 draw.text((15, 20), options[current-1], font=DisplaySettings.MENU_OPTIONS_FONT, fill="white")

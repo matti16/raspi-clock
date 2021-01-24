@@ -80,6 +80,7 @@ class RotaryController():
     def click_listener(self):
         while True:
             # Show alarms on press
+            print(self.rotary_enc.read_button())
             if self.rotary_enc.read_button() == 0:  
                 with self.clock.lock:
                     self.edit_settings()
@@ -88,6 +89,7 @@ class RotaryController():
 
     def edit_settings(self):
         selected_idx = 0
+        self.clock.display.show_menu(MenuSettings.OPTIONS, selected_idx)
 
         while self.rotary_enc.read_button() != 0:
             clkState = GPIO.input(clk)

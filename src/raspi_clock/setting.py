@@ -29,8 +29,8 @@ class DisplaySettings(object):
     DATE_TEXT_POS = (45, 49)
     DATE_FONT = ImageFont.truetype(os.path.join(RESOURCES_PATH, "font", "LeagueGothic-Regular.otf"), 15)
 
-    MENU_TITLE_FONT = ImageFont.truetype(os.path.join(RESOURCES_PATH, "font", "LeagueGothic-Regular.otf"), 18)
-    MENU_OPTIONS_FONT = ImageFont.truetype(os.path.join(RESOURCES_PATH, "font", "LeagueGothic-Regular.otf"), 14)
+    MENU_TITLE_FONT = ImageFont.truetype(os.path.join(RESOURCES_PATH, "font", "LeagueGothic-Regular.otf"), 20)
+    MENU_OPTIONS_FONT = ImageFont.truetype(os.path.join(RESOURCES_PATH, "font", "LeagueGothic-Regular.otf"), 15)
 
 class AudioSettings(object):
     FILE_PATH = os.path.join(RESOURCES_PATH, "media", "Queen-Dont_Stop_Me_Now.mp3")

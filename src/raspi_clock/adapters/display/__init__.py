@@ -98,7 +98,7 @@ class OLEDDisplay():
     
     def show_menu(self, options, current):
         with canvas(self.device) as draw:
-            draw.text((20, 5), "Settings", font=DisplaySettings.MENU_TITLE_FONT, fill="white")
+            draw.text((30, 2), "Settings", font=DisplaySettings.MENU_TITLE_FONT, fill="white")
 
             draw.text((25, 35), options[current], font=DisplaySettings.MENU_OPTIONS_FONT, fill="white")
             draw.polygon([(10, 30), (22, 35), (10, 30)], fill="white", outline="white")

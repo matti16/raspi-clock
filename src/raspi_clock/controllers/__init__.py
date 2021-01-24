@@ -88,9 +88,12 @@ class RotaryController():
 
     def edit_settings(self):
         selected_idx = 0
-        self.display.show_menu(MenuSettings.OPTIONS, selected_idx)
 
         while self.rotary_enc.read_button() != 0:
             rotation = self.rotary_enc.read_rotation()
+            
             selected_idx = (selected_idx + rotation) % len(MenuSettings.OPTIONS)
+            print(MenuSettings.OPTIONS, selected_idx)
             self.display.show_menu(MenuSettings.OPTIONS, selected_idx)
+
+            time.sleep(0.1)

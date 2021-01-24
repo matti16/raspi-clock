@@ -98,12 +98,13 @@ class OLEDDisplay():
     
     def show_menu(self, options, current):
         with canvas(self.device) as draw:
-            draw.text((30, 2), "Settings", font=DisplaySettings.MENU_TITLE_FONT, fill="white")
+            middle_y = self.device.height/2
 
-            draw.text((40, 35), options[current], font=DisplaySettings.MENU_OPTIONS_FONT, fill="white")
-            draw.polygon([(25, 35), (32, 40), (25, 45)], fill="white", outline="white")
+            draw.text((0, middle_y), "Settings", font=DisplaySettings.MENU_TITLE_FONT, fill="white")
+            draw.polygon([(52, middle_y-15), (57, middle_y-10), (52, middle_y-5)], fill="white", outline="white")
 
+            draw.text((60, middle_y), options[current], font=DisplaySettings.MENU_OPTIONS_FONT, fill="white")
             if current > 0:
-                draw.text((40, 20), options[current-1], font=DisplaySettings.MENU_OPTIONS_FONT, fill="white")
+                draw.text((60, 10), options[current-1], font=DisplaySettings.MENU_OPTIONS_FONT, fill="white")
             if current < len(options) - 1:
-                draw.text((40, 50), options[current+1], font=DisplaySettings.MENU_OPTIONS_FONT, fill="white")
+                draw.text((60, 50), options[current+1], font=DisplaySettings.MENU_OPTIONS_FONT, fill="white")

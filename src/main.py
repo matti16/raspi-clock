@@ -12,8 +12,8 @@ class Main():
         self.rotary_controller = RotaryController(self.alarm_clock)
     
     def start(self):
-        self.alarm_clock.start_display_time_thread()
         self.alarm_clock.load_settings()
+        self.alarm_clock.start_display_time_thread()
         threading.Thread(target=self.rotary_controller.click_listener).start()
     
 

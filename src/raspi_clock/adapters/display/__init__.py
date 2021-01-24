@@ -100,10 +100,10 @@ class OLEDDisplay():
         with canvas(self.device) as draw:
             draw.text((30, 2), "Settings", font=DisplaySettings.MENU_TITLE_FONT, fill="white")
 
-            draw.text((35, 35), options[current], font=DisplaySettings.MENU_OPTIONS_FONT, fill="white")
-            draw.polygon([(25, 30), (32, 35), (25, 40)], fill="white", outline="white")
+            draw.text((40, 35), options[current], font=DisplaySettings.MENU_OPTIONS_FONT, fill="white")
+            draw.polygon([(25, 35), (32, 40), (25, 45)], fill="white", outline="white")
 
             if current > 0:
-                draw.text((35, 20), options[current-1], font=DisplaySettings.MENU_OPTIONS_FONT, fill="white")
+                draw.text((40, 20), options[current-1], font=DisplaySettings.MENU_OPTIONS_FONT, fill="white")
             if current < len(options) - 1:
-                draw.text((35, 50), options[current+1], font=DisplaySettings.MENU_OPTIONS_FONT, fill="white")
+                draw.text((40, 50), options[current+1], font=DisplaySettings.MENU_OPTIONS_FONT, fill="white")

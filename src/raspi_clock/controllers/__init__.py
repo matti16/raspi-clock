@@ -91,9 +91,5 @@ class RotaryController():
 
         while self.rotary_enc.read_button() != 0:
             rotation = self.rotary_enc.read_rotation()
-            
             selected_idx = (selected_idx + rotation) % len(MenuSettings.OPTIONS)
-            print(MenuSettings.OPTIONS, selected_idx)
             self.display.show_menu(MenuSettings.OPTIONS, selected_idx)
-
-            time.sleep(0.01)

@@ -85,10 +85,23 @@ class OLEDDisplay():
             self.draw_sun(draw, sun_x, sun_y)
             self.draw_moon(draw, moon_x, moon_y)
             
-            draw.text(DispalySettings.HOURS_TEXT_POS, f"{hours:02d}:{minutes:02d}", font=DispalySettings.HOURS_FONT, fill="white")
+            draw.text(DispalySettings.HOURS_TEXT_POS, f"{hours:02d} : {minutes:02d}", font=DispalySettings.HOURS_FONT, fill="white")
             draw.text(DispalySettings.DATE_TEXT_POS, today_date, font=DispalySettings.DATE_FONT, fill="white")
     
 
     def show_alarm(self):
         with canvas(self.device) as draw:
             draw.text((50, 25), "SVEGLIA!!!!!", fill="white")
+
+    
+    def show_menu(options, current):
+        with canvas(self.device) as draw:
+            draw.text((10, 5), "Settings", font=DispalySettings.MENU_TITLE_FONT, fill="white")
+
+            draw.text((15, 35), options[current], font=DispalySettings.MENU_OPTIONS_FONT, fill="white")
+            draw.polygon([(5, 25), (12, 30), (5, 35)], fill="white", outline="white")
+
+            if current > 0:
+                draw.text((15, 20), options[current-1], font=DispalySettings.MENU_OPTIONS_FONT, fill="white")
+            if current < len(options) - 1:
+                draw.text((15, 50), options[current+1], font=DispalySettings.MENU_OPTIONS_FONT, fill="white")

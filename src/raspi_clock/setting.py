@@ -23,15 +23,15 @@ class DispalySettings(object):
     SUNRISE = 6
     SUNSET = 18
 
-    HOURS_TEXT_POS = (47, 22)
-    HOURS_FONT = ImageFont.truetype(
-        os.path.join(RESOURCES_PATH, "font", "LeagueGothic-Regular.otf"), 25
-    )
+    HOURS_TEXT_POS = (46, 22)
+    HOURS_FONT = ImageFont.truetype(os.path.join(RESOURCES_PATH, "font", "LeagueGothic-Regular.otf"), 25)
 
     DATE_TEXT_POS = (45, 49)
-    DATE_FONT = ImageFont.truetype(
-        os.path.join(RESOURCES_PATH, "font", "LeagueGothic-Regular.otf"), 15
-    )
+    DATE_FONT = ImageFont.truetype(os.path.join(RESOURCES_PATH, "font", "LeagueGothic-Regular.otf"), 15)
+
+    MENU_TITLE_FONT = ImageFont.truetype(os.path.join(RESOURCES_PATH, "font", "LeagueGothic-Regular.otf"), 25)
+    MENU_OPTION_FONT = ImageFont.truetype(os.path.join(RESOURCES_PATH, "font", "LeagueGothic-Regular.otf"), 20)
+
 class AudioSettings(object):
     FILE_PATH = os.path.join(RESOURCES_PATH, "media", "Queen-Dont_Stop_Me_Now.mp3")
 
@@ -46,7 +46,16 @@ class AlarmSettings(object):
     MAX_VALUES = [24, 60]
 
 class RotaryEncoderSettings(object):
-    BUTTON_PIN = 12
-    MAX_VALUE = 254
+    CLK_PIN = 20
+    DT_PIN = 12
+    SWITCH_PIN = 13
     PRESS_SECONDS = 1.5
+
+
+class MenuSettings(object):
+    MENU_OPTIONS = [
+        "Alarm"
+        "Timezone"
+        "Exit"
+    ]
 

@@ -9,7 +9,7 @@ from raspi_clock.adapters.display import OLEDDisplay
 from raspi_clock.adapters.button import Clicker
 from raspi_clock.adapters.rotary_encoder import RotaryEncoder
 
-from raspi_clock.setting import AlarmSettings, RotaryEncoderSettings
+from raspi_clock.setting import AlarmSettings, RotaryEncoderSettings, MenuSettings
 
 class Alarm():
 
@@ -80,53 +80,22 @@ class RotaryController():
     def click_listener(self):
         while True:
             # Show alarms on press
-            if self.rotary_enc.read_button():  
+            if self.rotary_enc.read_button() == 0:  
                 with self.clock.lock:
-                    self.show_alarms()
-                    # If still pressed, go in edit mode
-                    if self.rotary_enc.read_button():
-                        self.edit_alarm()
+                    self.edit_settings()
             time.sleep(0.1)
 
 
-    def show_alarms(self):
-        if len(self.clock.alarm.alarms):
-            self.clock.alarm.display.display_string("Current Alarm", 1)
-            self.clock.alarm.display.display_string(self.clock.alarm.alarms[0], 2)
-        else:
-            self.clock.alarm.display.display_string("No Alarms Set", 1)
-        time.sleep(RotaryEncoderSettings.PRESS_SECONDS)
+    def edit_settings(self):
+        selected_idx = 0
 
+        while self.rotary_enc.read_button() != 0:
+            clkState = GPIO.input(clk)
+            dtState = GPIO.input(dt)
 
-    def edit_alarm(self):
-        current_alarm = self.clock.alarm.alarms[0] if len(self.clock.alarm.alarms) else "00:00"
-        current_alarm_ints = [int(i) for i in current_alarm.split(":")]
-        
-        self.clock.alarm.display.display_string("Set Alarm", 1)
-        self.clock.alarm.display.display_string(current_alarm, 2)
-
-        # # Set Hours
-        # while self.rotary_enc.read_button():
-        #     time.sleep(0.1)
-        # while self.rotary_enc.read_button() == 0:
-        #     current_alarm_str = f"->{current_alarm}  "
-        #     self.clock.alarm.display.display_string(current_alarm_str, 2)
-        #     rotatation_perc = self.rotary_enc.read_rotation_perc()
-        #     hours = int( rotatation_perc * AlarmSettings.MAX_VALUES[0] )
-        #     current_alarm_ints[0] = hours % AlarmSettings.MAX_VALUES[0]
-        #     current_alarm = f"{current_alarm_ints[0]:02d}:{current_alarm_ints[1]:02d}"
-
-        # # Set Minutes
-        # while self.rotary_enc.read_button():
-        #     time.sleep(0.1)
-        # while self.rotary_enc.read_button() == 0:
-        #     current_alarm_str = f"  {current_alarm}<-"
-        #     self.clock.alarm.display.display_string(current_alarm_str, 2)
-        #     rotatation_perc = self.rotary_enc.read_rotation_perc()
-        #     minutes = int( rotatation_perc * AlarmSettings.MAX_VALUES[1] )
-        #     current_alarm_ints[1] = minutes % AlarmSettings.MAX_VALUES[1]
-        #     current_alarm = f"{current_alarm_ints[0]:02d}:{current_alarm_ints[1]:02d}"
-
-        # json.dump([current_alarm], open(AlarmSettings.ALARMS_PATH, "w"))
-        # self.clock.schedule_alarms()
-        # self.show_alarms()
+            if clkState == 1 and dtState == 0:
+                selected_idx -= 1
+            elif clkState == 0 and dtState == 1:
+                selected_idx += 1
+            
+            self.clock.display.show_menu(MenuSettings.OPTIONS, selected_idx)

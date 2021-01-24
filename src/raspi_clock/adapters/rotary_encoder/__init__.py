@@ -20,13 +20,13 @@ class RotaryEncoder():
         GPIO.add_event_detect(self.clk, GPIO.FALLING, callback=self.clk_clicked, bouncetime=100)
         GPIO.add_event_detect(self.dt, GPIO.FALLING, callback=self.dt_clicked, bouncetime=100)
     
-    def dt_clicked(channel):
+    def dt_clicked(self, channel):
         clkState = GPIO.input(self.clk)
         dtState = GPIO.input(self.dt)
         if clkState == 1 and dtState == 0:
             self.rotation = self.rotation - 1
     
-    def clk_clicked(channel):
+    def clk_clicked(self, channel):
         clkState = GPIO.input(self.clk)
         dtState = GPIO.input(self.dt)
         if clkState == 0 and dtState == 1:

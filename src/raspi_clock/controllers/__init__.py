@@ -101,14 +101,17 @@ class RotaryController():
 
     def edit_settings(self):
         self.rotary_enc.reset_status()
-
+        
+        while self.rotary_enc.read_button() == 0:
+            time.sleep(0.1)
+        selected_idx = 0
         while self.rotary_enc.read_button() != 0:
             rotation = self.rotary_enc.rotation
             selected_idx = rotation % len(MenuSettings.OPTIONS)
             self.display.show_menu(MenuSettings.OPTIONS, selected_idx)
         
-        time.sleep(0.5)
-
+        while self.rotary_enc.read_button() == 0:
+            time.sleep(0.1)
         if selected_idx == 0:
             self.edit_alarm()
         elif selected_idx == 1:
@@ -127,7 +130,9 @@ class RotaryController():
             hours = (hours + rotation) % AlarmSettings.HOURS
             self.display.show_set_alarm(hours, minutes, alarm_on, editing_idx=0)
         
-        time.sleep(0.5)
+        while self.rotary_enc.read_button() == 0:
+            time.sleep(0.1)
+            
         # Editing Minutes
         self.rotary_enc.reset_status()
         self.display.show_set_alarm(hours, minutes, alarm_on, editing_idx=1)
@@ -135,6 +140,9 @@ class RotaryController():
             rotation = self.rotary_enc.rotation
             minutes = (minutes + rotation) % AlarmSettings.MINUTES
             self.display.show_set_alarm(hours, minutes, alarm_on, editing_idx=1)
+        
+        while self.rotary_enc.read_button() == 0:
+            time.sleep(0.1)
 
 
 

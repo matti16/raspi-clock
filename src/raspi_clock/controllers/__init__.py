@@ -166,7 +166,7 @@ class RotaryController():
         self.rotary_enc.reset_status(int(alarm_on) + 1)
         self.display.show_set_alarm(hours, minutes, alarm_on, editing_idx=2)
         while self.rotary_enc.read_button() != 0:
-            rotation = self.rotary_enc.rotation + 1
+            rotation = self.rotary_enc.rotation
             alarm_on = bool(rotation % 2)
             self.display.show_set_alarm(hours, minutes, alarm_on, editing_idx=2)
         

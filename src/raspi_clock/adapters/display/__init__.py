@@ -128,26 +128,26 @@ class OLEDDisplay():
             )
 
             draw.text(
-                (65, 7), 
+                (65, 12), 
                 f"{hours:02d} : {minutes:02d}", 
                 font=DisplaySettings.HOURS_FONT, 
                 fill="white"
             )
             
             draw.ellipse(
-                (80, 48, 93, 60),
+                (80, 48, 92, 60),
                 fill="white" if alarm_on else "black", 
                 outline="white"
             )
             draw.text(
-                (100, 48), 
+                (100, 49), 
                 "ON" if alarm_on else "OFF", 
                 fill="white"
             )
             
             if editing_idx == 0:
-                draw.polygon([(68, 40), (73, 35), (78, 40)], fill="white", outline="white")
+                draw.polygon([(70, 40), (73, 35), (76, 40)], fill="white", outline="white")
             elif editing_idx == 1:
-                draw.polygon([(97, 40), (102, 35), (107, 40)], fill="white", outline="white")
+                draw.polygon([(99, 40), (102, 35), (105, 40)], fill="white", outline="white")
             elif editing_idx == 2:
                 draw.polygon([(65, 50), (70, 53), (65, 56)], fill="white", outline="white")

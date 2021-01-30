@@ -17,8 +17,8 @@ class RotaryEncoder():
         GPIO.setup(RotaryEncoderSettings.SW_PIN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
     def setup_interrupt(self):
-        GPIO.add_event_detect(self.clk, GPIO.FALLING, callback=self.clk_clicked, bouncetime=100)
-        GPIO.add_event_detect(self.dt, GPIO.FALLING, callback=self.dt_clicked, bouncetime=100)
+        GPIO.add_event_detect(self.clk, GPIO.FALLING, callback=self.clk_clicked, bouncetime=50)
+        GPIO.add_event_detect(self.dt, GPIO.FALLING, callback=self.dt_clicked, bouncetime=50)
     
     def dt_clicked(self, channel):
         clkState = GPIO.input(self.clk)

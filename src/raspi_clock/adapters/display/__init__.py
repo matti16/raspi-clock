@@ -135,7 +135,7 @@ class OLEDDisplay():
             )
             
             draw.ellipse(
-                (80, 55, 95, 60),
+                (75, 45, 95, 55),
                 fill="white" if alarm_on else "black", 
                 outline="white"
             )
@@ -150,4 +150,4 @@ class OLEDDisplay():
             elif editing_idx == 1:
                 draw.polygon([(97, 40), (102, 35), (107, 40)], fill="white", outline="white")
             elif editing_idx == 2:
-                draw.polygon([(65, 52), (72, 55), (65, 58)], fill="white", outline="white")
+                draw.polygon([(65, 47), (72, 50), (65, 53)], fill="white", outline="white")

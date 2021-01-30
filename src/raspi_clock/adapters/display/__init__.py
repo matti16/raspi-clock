@@ -119,16 +119,22 @@ class OLEDDisplay():
 
     def show_set_alarm(self, hours, minutes, alarm_on, editing_idx):
         with canvas(self.device) as draw:
-            draw.text((35, 0), "Set alarm", font=DisplaySettings.MENU_TITLE_FONT, fill="white")
+            middle_y = self.device.height/2
+            draw.text(
+                (0, middle_y-DisplaySettings.MENU_TITLE_FONT.size/2), 
+                "Alarm", 
+                font=DisplaySettings.MENU_TITLE_FONT, 
+                fill="white"
+            )
 
             draw.text(
-                (42, 15), 
+                (65, 12), 
                 f"{hours:02d} : {minutes:02d}", 
                 font=DisplaySettings.HOURS_FONT, 
                 fill="white"
             )
 
             if editing_idx == 0:
-                draw.polygon([(42, 45), (45, 40), (48, 45)], fill="white", outline="white")
+                draw.polygon([(70, 68), (75, 60), (80, 68)], fill="white", outline="white")
             elif editing_idx == 1:
-                draw.polygon([(68, 45), (71, 40), (74, 45)], fill="white", outline="white")
+                draw.polygon([(90, 68), (95, 60), (100, 68)], fill="white", outline="white")

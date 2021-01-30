@@ -9,7 +9,7 @@ class SongPlayer():
         self.player = vlc.MediaPlayer(filepath)
     
     def play(self):
-        self.player.audio_set_volume(300)
+        self.player.audio_set_volume(150)
         self.player.play()
     
     def stop(self):

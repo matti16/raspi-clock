@@ -121,7 +121,7 @@ class OLEDDisplay():
         with canvas(self.device) as draw:
             middle_y = self.device.height/2
             draw.text(
-                (0, middle_y-DisplaySettings.MENU_TITLE_FONT.size/2), 
+                (10, middle_y-DisplaySettings.MENU_TITLE_FONT.size/2), 
                 "Alarm", 
                 font=DisplaySettings.MENU_TITLE_FONT, 
                 fill="white"
@@ -135,6 +135,6 @@ class OLEDDisplay():
             )
 
             if editing_idx == 0:
-                draw.polygon([(70, 68), (75, 60), (80, 68)], fill="white", outline="white")
+                draw.polygon([(70, 25), (75, 17), (80, 25)], fill="white", outline="white")
             elif editing_idx == 1:
-                draw.polygon([(90, 68), (95, 60), (100, 68)], fill="white", outline="white")
+                draw.polygon([(95, 25), (100, 17), (105, 25)], fill="white", outline="white")

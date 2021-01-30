@@ -135,12 +135,12 @@ class OLEDDisplay():
             )
             
             draw.ellipse(
-                (75, 50, 85, 60),
+                (80, 55, 95, 60),
                 fill="white" if alarm_on else "black", 
                 outline="white"
             )
             draw.text(
-                (90, 52), 
+                (95, 50), 
                 "ON" if alarm_on else "OFF", 
                 fill="white"
             )

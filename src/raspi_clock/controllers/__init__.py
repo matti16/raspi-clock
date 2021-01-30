@@ -42,7 +42,9 @@ class Alarm():
         self.timezone = timezone if timezone else self.timezone
 
         settings = {
-            "alarm": alarm, "alarm_on": alarm_on, "timezone": timezone
+            "alarm": self.alarm, 
+            "alarm_on": self.alarm_on, 
+            "timezone": self.timezone
         }
         json.dump(settings, open(AlarmSettings.SETTINGS_PATH, "w"), indent=4)
 

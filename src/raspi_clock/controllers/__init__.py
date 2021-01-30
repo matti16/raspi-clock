@@ -37,9 +37,9 @@ class Alarm():
 
 
     def update_settings(self, alarm=None, alarm_on=None, timezone=None):
-        self.alarm = alarm if alarm else self.alarm
-        self.alarm_on = alarm_on if alarm_on else self.alarm_on
-        self.timezone = timezone if timezone else self.timezone
+        self.alarm = alarm if alarm not None else self.alarm
+        self.alarm_on = alarm_on if alarm_on is not None else self.alarm_on
+        self.timezone = timezone if timezone not None else self.timezone
 
         settings = {
             "alarm": self.alarm, 

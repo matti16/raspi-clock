@@ -43,7 +43,8 @@ class ClickerSettings(object):
 
 class AlarmSettings(object):
     SETTINGS_PATH = os.path.join(BASE_PATH, "settings.json")
-    MAX_VALUES = [24, 60]
+    HOURS = 24
+    MINUTES = 60
 
 class RotaryEncoderSettings(object):
     CLK_PIN = 20

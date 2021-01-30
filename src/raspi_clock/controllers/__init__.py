@@ -25,7 +25,8 @@ class Alarm():
         try:
             settings = json.load(open(AlarmSettings.SETTINGS_PATH))
             print(f"Loaded {settings}")
-            self.alarm = settings.get("alarm", "")
+            self.alarm = settings.get("alarm_time", "00:00")
+            self.alarm_on = settings.get("alarm_on", False)
             self.timezone = settings.get("timezone", "GMT")
 
         except Exception as e:
@@ -71,12 +72,15 @@ class RaspiClock():
     def load_settings(self):
         self.alarm.read_settings()
         schedule.clear()
-        if self.alarm.alarm:
+        if self.alarm.alarm_on:
             tz = datetime.datetime.now(tz=pytz.timezone(self.alarm.timezone)).tzinfo
             a = datetime.datetime.strptime(self.alarm.alarm, "%H:%M").replace(tzinfo=tz).astimezone(pytz.utc)
             a = a.strftime("%H:%M")
             print(f"Scheduling alarm at {self.alarm.alarm} {self.alarm.timezone} ({a} UTC)")
             schedule.every().day.at(a).do(self.start_alarm)
+        else:
+            print(f"Clearing Alarm")
+            schedule.clear()
 
 
 class RotaryController():
@@ -102,3 +106,35 @@ class RotaryController():
             rotation = self.rotary_enc.rotation
             selected_idx = rotation % len(MenuSettings.OPTIONS)
             self.display.show_menu(MenuSettings.OPTIONS, selected_idx)
+        
+        time.sleep(0.5)
+
+        if selected_idx == 0:
+            self.edit_alarm()
+        elif selected_idx == 1:
+            self.edit_timezone()
+
+    def edit_alarm(self):
+        hours, minutes = self.alarm.alarm.split(":")
+        hours, minutes = int(hours), int(minutes)
+        alarm_on = self.alarm.alarm_on
+
+        # Editing Hours
+        self.rotary_enc.reset_status()
+        self.display.show_set_alarm(hours, minutes, alarm_on, editing_idx=0)
+        while self.rotary_enc.read_button() != 0:
+            rotation = self.rotary_enc.rotation
+            hours = (hours + rotation) % AlarmSettings.HOURS
+            self.display.show_set_alarm(hours, minutes, alarm_on, editing_idx=0)
+        
+        time.sleep(0.5)
+        # Editing Minutes
+        self.rotary_enc.reset_status()
+        self.display.show_set_alarm(hours, minutes, alarm_on, editing_idx=1)
+        while self.rotary_enc.read_button() != 0:
+            rotation = self.rotary_enc.rotation
+            minutes = (minutes + rotation) % AlarmSettings.MINUTES
+            self.display.show_set_alarm(hours, minutes, alarm_on, editing_idx=1)
+
+
+

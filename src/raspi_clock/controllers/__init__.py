@@ -30,9 +30,21 @@ class Alarm():
             self.timezone = settings.get("timezone", "GMT")
 
         except Exception as e:
-            self.alarm = ""
+            self.alarm = "00:00"
+            self.alarm_on = False
             self.timezone = "GMT"
             print(e)
+
+
+    def update_settings(self, alarm=None, alarm_on=None, timezone=None):
+        self.alarm = alarm if alarm else self.alarm
+        self.alarm_on = alarm_on if alarm_on else self.alarm_on
+        self.timezone = timezone if timezone else self.timezone
+
+        settings = {
+            "alarm": alarm, "alarm_on": alarm_on, "timezone": timezone
+        }
+        json.dump(settings, open(AlarmSettings.SETTINGS_PATH, "w"), indent=4)
 
     
     def show_current_time(self, lock):
@@ -64,24 +76,28 @@ class RaspiClock():
         )
         self.display_thread.start()
 
-
     def start_alarm(self):
         self.alarm.start_alarm(self.lock)
 
+    def set_alarm(self, alarm, timezone, on):
+        schedule.clear()
+        if on:
+            tz = datetime.datetime.now(tz=pytz.timezone(timezone)).tzinfo
+            a = datetime.datetime.strptime(alarm, "%H:%M").replace(tzinfo=tz).astimezone(pytz.utc)
+            a = a.strftime("%H:%M")
+            print(f"Scheduling alarm at {alarm} {timezone} ({a} UTC)")
+            schedule.every().day.at(a).do(self.start_alarm)
+        else:
+            print(f"Cleared Alarm")
 
     def load_settings(self):
         self.alarm.read_settings()
-        schedule.clear()
-        if self.alarm.alarm_on:
-            tz = datetime.datetime.now(tz=pytz.timezone(self.alarm.timezone)).tzinfo
-            a = datetime.datetime.strptime(self.alarm.alarm, "%H:%M").replace(tzinfo=tz).astimezone(pytz.utc)
-            a = a.strftime("%H:%M")
-            print(f"Scheduling alarm at {self.alarm.alarm} {self.alarm.timezone} ({a} UTC)")
-            schedule.every().day.at(a).do(self.start_alarm)
-        else:
-            print(f"Clearing Alarm")
-            schedule.clear()
-
+        self.set_alarm(self.alarm.alarm, self.alarm.timezone, self.alarm.alarm_on)
+    
+    def update_settings(self, alarm=None, alarm_on=None, timezone=None):
+        self.alarm.update_settings(alarm, alarm_on, timezone)
+        self.set_alarm(self.alarm.alarm, self.alarm.timezone, self.alarm.alarm_on)
+    
 
 class RotaryController():
 
@@ -144,5 +160,6 @@ class RotaryController():
         while self.rotary_enc.read_button() == 0:
             time.sleep(0.1)
 
-
+        alarm = f"{hours:02d}:{minutes:02d}"
+        self.clock.update_settings(alarm=alarm, alarm_on=alarm_on, timezone=None)
 

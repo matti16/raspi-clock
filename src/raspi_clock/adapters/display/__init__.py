@@ -15,8 +15,8 @@ class OLEDDisplay():
         self.device = sh1106(serial)
         with canvas(self.device) as draw:
             draw.text((35, 5), "Hack", font=DisplaySettings.MENU_TITLE_FONT, fill="white")
-            draw.text((35, 20), "your", font=DisplaySettings.MENU_TITLE_FONT, fill="white")
-            draw.text((35, 35), "Discipline", font=DisplaySettings.MENU_TITLE_FONT, fill="white")
+            draw.text((35, 25), "Your", font=DisplaySettings.MENU_TITLE_FONT, fill="white")
+            draw.text((35, 40), "Discipline", font=DisplaySettings.MENU_TITLE_FONT, fill="white")
 
         
     def draw_moon(self, draw, cx, cy):

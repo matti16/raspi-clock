@@ -19,6 +19,7 @@ class Main():
 
 if __name__ == "__main__":
     main = Main()
+    time.sleep(3)
     main.start()
 
     try:

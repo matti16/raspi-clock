@@ -134,7 +134,14 @@ class OLEDDisplay():
                 fill="white"
             )
 
+            if alarm_on:
+                draw.text((70, 55), "ON", fill="white")
+            else:
+                draw.text((70, 55), "OFF", fill="white")
+
             if editing_idx == 0:
-                draw.polygon([(68, 45), (73, 37), (78, 45)], fill="white", outline="white")
+                draw.polygon([(68, 40), (73, 35), (78, 40)], fill="white", outline="white")
             elif editing_idx == 1:
-                draw.polygon([(98, 45), (103, 37), (108, 45)], fill="white", outline="white")
+                draw.polygon([(97, 40), (102, 35), (107, 40)], fill="white", outline="white")
+            elif editing_idx == 2:
+                draw.polygon([(60, 50), (67, 55), (60, 60)], fill="white", outline="white")

@@ -14,7 +14,9 @@ class OLEDDisplay():
         serial = i2c(port=1, address=0x3C)
         self.device = sh1106(serial)
         with canvas(self.device) as draw:
-            draw.text((35, 20), "Loading...", font=DisplaySettings.MENU_TITLE_FONT, fill="white")
+            draw.text((35, 5), "Hack", font=DisplaySettings.MENU_TITLE_FONT, fill="white")
+            draw.text((35, 20), "your", font=DisplaySettings.MENU_TITLE_FONT, fill="white")
+            draw.text((35, 35), "Discipline", font=DisplaySettings.MENU_TITLE_FONT, fill="white")
 
         
     def draw_moon(self, draw, cx, cy):

@@ -35,5 +35,5 @@ class RotaryEncoder():
     def read_button(self):
         return GPIO.input(self.switch)
     
-    def reset_status(self):
-        self.rotation = 0  
+    def reset_status(self, status=0):
+        self.rotation = status

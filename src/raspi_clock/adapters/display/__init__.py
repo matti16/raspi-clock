@@ -122,13 +122,13 @@ class OLEDDisplay():
             draw.text((35, 0), "Set alarm", font=DisplaySettings.MENU_TITLE_FONT, fill="white")
 
             draw.text(
-                (42, 5), 
+                (42, 15), 
                 f"{hours:02d} : {minutes:02d}", 
                 font=DisplaySettings.HOURS_FONT, 
                 fill="white"
             )
 
             if editing_idx == 0:
-                draw.polygon([(42, 25), (45, 20), (48, 25)], fill="white", outline="white")
+                draw.polygon([(42, 45), (45, 40), (48, 45)], fill="white", outline="white")
             elif editing_idx == 1:
-                draw.polygon([(48, 25), (51, 20), (54, 25)], fill="white", outline="white")
+                draw.polygon([(68, 45), (71, 40), (74, 45)], fill="white", outline="white")

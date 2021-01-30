@@ -118,9 +118,9 @@ class RotaryController():
             self.edit_timezone()
 
     def edit_alarm(self):
-        hours, minutes = self.alarm.alarm.split(":")
+        hours, minutes = self.clock.alarm.split(":")
         hours, minutes = int(hours), int(minutes)
-        alarm_on = self.alarm.alarm_on
+        alarm_on = self.clock.alarm_on
 
         # Editing Hours
         self.rotary_enc.reset_status()
@@ -132,7 +132,7 @@ class RotaryController():
         
         while self.rotary_enc.read_button() == 0:
             time.sleep(0.1)
-            
+
         # Editing Minutes
         self.rotary_enc.reset_status()
         self.display.show_set_alarm(hours, minutes, alarm_on, editing_idx=1)

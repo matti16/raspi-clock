@@ -140,7 +140,7 @@ class OLEDDisplay():
                 outline="white"
             )
             draw.text(
-                (100, 49), 
+                (98, 49), 
                 "ON" if alarm_on else "OFF", 
                 fill="white"
             )
@@ -150,4 +150,4 @@ class OLEDDisplay():
             elif editing_idx == 1:
                 draw.polygon([(99, 43), (102, 38), (105, 43)], fill="white", outline="white")
             elif editing_idx == 2:
-                draw.polygon([(65, 52), (70, 55), (65, 58)], fill="white", outline="white")
+                draw.polygon([(65, 51), (70, 54), (65, 57)], fill="white", outline="white")

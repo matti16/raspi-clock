@@ -176,3 +176,5 @@ class RotaryController():
         alarm = f"{hours:02d}:{minutes:02d}"
         self.clock.update_settings(alarm=alarm, alarm_on=alarm_on, timezone=None)
 
+    def edit_timezone(self):
+        pass

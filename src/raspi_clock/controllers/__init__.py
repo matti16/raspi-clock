@@ -25,7 +25,7 @@ class Alarm():
         try:
             settings = json.load(open(AlarmSettings.SETTINGS_PATH))
             print(f"Loaded {settings}")
-            self.alarm = settings.get("alarm_time", "00:00")
+            self.alarm = settings.get("alarm", "00:00")
             self.alarm_on = settings.get("alarm_on", False)
             self.timezone = settings.get("timezone", "GMT")
 

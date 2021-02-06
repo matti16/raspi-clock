@@ -14,8 +14,8 @@ class OLEDDisplay():
         serial = i2c(port=1, address=0x3C)
         self.device = sh1106(serial)
         with canvas(self.device) as draw:
-            draw.text((32, 5), "Mudesk Clock", font=DisplaySettings.MENU_TITLE_FONT, fill="white")
-            draw.text((10, 35), "Hack Your Discipline", font=DisplaySettings.MENU_OPTIONS_FONT, fill="white")
+            draw.text((30, 5), "Mudesk Clock", font=DisplaySettings.MENU_TITLE_FONT, fill="white")
+            draw.text((15, 35), "Hack Your Discipline", font=DisplaySettings.MENU_OPTIONS_FONT, fill="white")
 
         
     def draw_moon(self, draw, cx, cy):
@@ -158,12 +158,12 @@ class OLEDDisplay():
         with canvas(self.device) as draw:
             middle_y = self.device.height/2
 
-            draw.text((0, middle_y-DisplaySettings.MENU_TITLE_FONT.size/2), "Timezone", font=DisplaySettings.MENU_TITLE_FONT, fill="white")
-            draw.polygon([(55, middle_y-5), (63, middle_y), (55, middle_y+5)], fill="white", outline="white")
+            draw.text((0, middle_y-DisplaySettings.MENU_TITLE_FONT.size/2), "Zone", font=DisplaySettings.MENU_TITLE_FONT, fill="white")
+            draw.polygon([(40, middle_y-5), (48, middle_y), (40, middle_y+5)], fill="white", outline="white")
 
-            text_font = get_font(12)
-            draw.text((72, middle_y-DisplaySettings.MENU_OPTIONS_FONT.size/2), options[current], font=text_font, fill="white")
+            text_font = get_font(16)
+            draw.text((55, middle_y-DisplaySettings.MENU_OPTIONS_FONT.size/2), options[current], font=text_font, fill="white")
             if current > 0:
-                draw.text((72, 0), options[current-1], font=text_font, fill="white")
+                draw.text((55, 0), options[current-1], font=text_font, fill="white")
             if current < len(options) - 1:
-                draw.text((72, 50), options[current+1], font=text_font, fill="white")
+                draw.text((55, 50), options[current+1], font=text_font, fill="white")

@@ -9,7 +9,7 @@ print("BASE PATH: ", BASE_PATH)
 
 
 def get_font(size):
-    return ImageFont.truetype(os.path.join(RESOURCES_PATH, "font", "LeagueGothic-Regular.otf"), size)
+    return ImageFont.truetype(os.path.join(RESOURCES_PATH, "font", "Montserrat-Regular.otf"), size)
 
 class DisplaySettings(object):
     PORT = 1

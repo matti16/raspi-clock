@@ -23,14 +23,18 @@ class DisplaySettings(object):
     SUNRISE = 6
     SUNSET = 18
 
+    @staticmethod
+    def get_font(size):
+        ImageFont.truetype(os.path.join(RESOURCES_PATH, "font", "LeagueGothic-Regular.otf"), size)
+
     HOURS_TEXT_POS = (42, 21)
-    HOURS_FONT = ImageFont.truetype(os.path.join(RESOURCES_PATH, "font", "LeagueGothic-Regular.otf"), 26)
+    HOURS_FONT = get_font(26)
 
     DATE_TEXT_POS = (45, 49)
-    DATE_FONT = ImageFont.truetype(os.path.join(RESOURCES_PATH, "font", "LeagueGothic-Regular.otf"), 15)
+    DATE_FONT = get_font(15)
 
-    MENU_TITLE_FONT = ImageFont.truetype(os.path.join(RESOURCES_PATH, "font", "LeagueGothic-Regular.otf"), 20)
-    MENU_OPTIONS_FONT = ImageFont.truetype(os.path.join(RESOURCES_PATH, "font", "LeagueGothic-Regular.otf"), 16)
+    MENU_TITLE_FONT = get_font(20)
+    MENU_OPTIONS_FONT = get_font(16)
 
 class AudioSettings(object):
     FILE_PATH = os.path.join(RESOURCES_PATH, "media", "Queen-Dont_Stop_Me_Now.mp3")

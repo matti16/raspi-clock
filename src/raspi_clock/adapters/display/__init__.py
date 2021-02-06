@@ -162,7 +162,7 @@ class OLEDDisplay():
             draw.polygon([(25, middle_y-3), (30, middle_y), (25, middle_y+3)], fill="white", outline="white")
 
             text_font = DisplaySettings.TIMEZONES_FONT
-            draw.text((35, middle_y-DisplaySettings.MENU_OPTIONS_FONT.size/2 + 3), options[current], font=text_font, fill="white")
+            draw.text((35, middle_y-DisplaySettings.MENU_OPTIONS_FONT.size/2 + 4), options[current], font=text_font, fill="white")
             if current > 0:
                 draw.text((35, 10), options[current-1], font=text_font, fill="white")
             if current < len(options) - 1:

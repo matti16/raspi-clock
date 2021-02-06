@@ -17,6 +17,8 @@ class DisplaySettings(object):
     RAY_HEIGHT = 5
     ANGLED_RAYS_SCALE = 0.7
 
+    BELL_ICON = os.path.join(RESOURCES_PATH, "icons", "bell.bmp")
+
     MOON_RADIUS = 8
     MOON_SHIFT = 6
 
@@ -73,7 +75,6 @@ class AlarmSettings(object):
         "Canada/Central",
         "Canada/Eastern",
         "Canada/Mountain",
-        "Canada/Newfoundland",
         "Canada/Pacific",
         "Europe/Amsterdam",
         "Europe/Berlin",

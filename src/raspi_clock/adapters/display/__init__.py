@@ -91,7 +91,7 @@ class OLEDDisplay():
             self.draw_moon(draw, moon_x, moon_y)
 
             if alarm:
-                draw.bitmap((0, 0), Image.open(DisplaySettings.BELL_ICON), fill="white")
+                draw.bitmap(DisplaySettings.BELL_POS, Image.open(DisplaySettings.BELL_ICON), fill="white")
             
             draw.text(DisplaySettings.HOURS_TEXT_POS, f"{hours:02d} : {minutes:02d}", font=DisplaySettings.HOURS_FONT, fill="white")
             draw.text(DisplaySettings.DATE_TEXT_POS, today_date, font=DisplaySettings.DATE_FONT, fill="white")

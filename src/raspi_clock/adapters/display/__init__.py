@@ -73,6 +73,14 @@ class OLEDDisplay():
             moon_x_position = (hours_minutes + 24 - DisplaySettings.SUNSET) / (DisplaySettings.SUNSET - DisplaySettings.SUNRISE) * x_max
         
         return sun_x_position, moon_x_position
+    
+
+    def draw_bell(self, draw, hours):
+        hours = hours % 12
+        if hours < 12:
+            draw.bitmap((95, 30), Image.open(DisplaySettings.BELL_ICON), fill="white")
+        else:
+            draw.bitmap((35, 30), Image.open(DisplaySettings.BELL_ICON), fill="white")
 
 
     def show_sun_moon_clock(self, timezone, alarm):
@@ -91,7 +99,7 @@ class OLEDDisplay():
             self.draw_moon(draw, moon_x, moon_y)
 
             if alarm:
-                draw.bitmap(DisplaySettings.BELL_POS, Image.open(DisplaySettings.BELL_ICON), fill="white")
+                self.draw_bell(draw, hours)
             
             draw.text(DisplaySettings.HOURS_TEXT_POS, f"{hours:02d} : {minutes:02d}", font=DisplaySettings.HOURS_FONT, fill="white")
             draw.text(DisplaySettings.DATE_TEXT_POS, today_date, font=DisplaySettings.DATE_FONT, fill="white")

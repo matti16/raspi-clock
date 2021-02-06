@@ -161,7 +161,7 @@ class OLEDDisplay():
             draw.text((0, middle_y-DisplaySettings.MENU_TITLE_FONT.size/2), "Zone", font=DisplaySettings.MENU_TITLE_FONT, fill="white")
             draw.polygon([(40, middle_y-5), (48, middle_y), (40, middle_y+5)], fill="white", outline="white")
 
-            text_font = get_font(16)
+            text_font = get_text_font(16)
             draw.text((55, middle_y-DisplaySettings.MENU_OPTIONS_FONT.size/2), options[current], font=text_font, fill="white")
             if current > 0:
                 draw.text((55, 0), options[current-1], font=text_font, fill="white")

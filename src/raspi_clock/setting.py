@@ -18,7 +18,7 @@ class DisplaySettings(object):
     ANGLED_RAYS_SCALE = 0.7
 
     BELL_ICON = os.path.join(RESOURCES_PATH, "icons", "bell.bmp")
-    BELL_POS = (92, 21)
+    BELL_POS = (95, 30)
 
     MOON_RADIUS = 8
     MOON_SHIFT = 6

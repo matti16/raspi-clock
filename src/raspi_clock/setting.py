@@ -28,13 +28,13 @@ class DisplaySettings(object):
         ImageFont.truetype(os.path.join(RESOURCES_PATH, "font", "LeagueGothic-Regular.otf"), size)
 
     HOURS_TEXT_POS = (42, 21)
-    HOURS_FONT = DisplaySettings.get_font(26)
+    HOURS_FONT = self.get_font(26)
 
     DATE_TEXT_POS = (45, 49)
-    DATE_FONT = DisplaySettings.get_font(15)
+    DATE_FONT = self.get_font(15)
 
-    MENU_TITLE_FONT = DisplaySettings.get_font(20)
-    MENU_OPTIONS_FONT = DisplaySettings.get_font(16)
+    MENU_TITLE_FONT = self.get_font(20)
+    MENU_OPTIONS_FONT = self.get_font(16)
 
 class AudioSettings(object):
     FILE_PATH = os.path.join(RESOURCES_PATH, "media", "Queen-Dont_Stop_Me_Now.mp3")

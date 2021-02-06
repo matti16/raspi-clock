@@ -7,13 +7,6 @@ RESOURCES_PATH = os.path.join(BASE_PATH, "resources")
 
 print("BASE PATH: ", BASE_PATH)
 
-
-def get_text_font(size):
-    return ImageFont.truetype(os.path.join(RESOURCES_PATH, "font", "Montserrat-Regular.otf"), size)
-
-def get_numbers_font(size):
-    return ImageFont.truetype(os.path.join(RESOURCES_PATH, "font", "LeagueGothic-Regular.otf"), size)
-
 class DisplaySettings(object):
     PORT = 1
     ADDRESS = 0x3C
@@ -31,13 +24,16 @@ class DisplaySettings(object):
     SUNSET = 18
 
     HOURS_TEXT_POS = (42, 21)
-    HOURS_FONT = get_numbers_font(26)
+    HOURS_FONT = ImageFont.truetype(os.path.join(RESOURCES_PATH, "font", "LeagueGothic-Regular.otf"), 26)
 
     DATE_TEXT_POS = (45, 49)
-    DATE_FONT = get_numbers_font(15)
+    DATE_FONT = ImageFont.truetype(os.path.join(RESOURCES_PATH, "font", "LeagueGothic-Regular.otf"), 15)
 
-    MENU_TITLE_FONT = get_text_font(18)
-    MENU_OPTIONS_FONT = get_text_font(14)
+    MENU_TITLE_FONT = ImageFont.truetype(os.path.join(RESOURCES_PATH, "font", "LeagueGothic-Regular.otf"), 20)
+    MENU_OPTIONS_FONT = ImageFont.truetype(os.path.join(RESOURCES_PATH, "font", "LeagueGothic-Regular.otf"), 16)
+
+    TIMEZONES_FONT = ImageFont.truetype(os.path.join(RESOURCES_PATH, "font", "Montserrat-Regular.otf"), 8)
+    
 
 class AudioSettings(object):
     FILE_PATH = os.path.join(RESOURCES_PATH, "media", "Queen-Dont_Stop_Me_Now.mp3")

@@ -99,11 +99,11 @@ class OLEDDisplay():
             draw.text((50, 25), "SVEGLIA!!!!!", fill="white")
 
     
-    def show_menu(self, options, current):
+    def show_menu(self, title, options, current):
         with canvas(self.device) as draw:
             middle_y = self.device.height/2
 
-            draw.text((0, middle_y-DisplaySettings.MENU_TITLE_FONT.size/2), "Settings", font=DisplaySettings.MENU_TITLE_FONT, fill="white")
+            draw.text((0, middle_y-DisplaySettings.MENU_TITLE_FONT.size/2), title, font=DisplaySettings.MENU_TITLE_FONT, fill="white")
             draw.polygon([(58, middle_y-5), (66, middle_y), (58, middle_y+5)], fill="white", outline="white")
 
             draw.text(

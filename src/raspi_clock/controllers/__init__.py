@@ -126,7 +126,7 @@ class RotaryController():
         while self.rotary_enc.read_button() != 0:
             rotation = self.rotary_enc.rotation
             selected_idx = rotation % len(MenuSettings.OPTIONS)
-            self.display.show_menu(MenuSettings.OPTIONS, selected_idx)
+            self.display.show_menu("Settings", MenuSettings.OPTIONS, selected_idx)
         
         while self.rotary_enc.read_button() == 0:
             time.sleep(0.1)
@@ -142,7 +142,6 @@ class RotaryController():
 
         # Editing Hours
         self.rotary_enc.reset_status(hours)
-        self.display.show_set_alarm(hours, minutes, alarm_on, editing_idx=0)
         while self.rotary_enc.read_button() != 0:
             rotation = self.rotary_enc.rotation
             hours = rotation % AlarmSettings.HOURS
@@ -153,7 +152,6 @@ class RotaryController():
 
         # Editing Minutes
         self.rotary_enc.reset_status(minutes)
-        self.display.show_set_alarm(hours, minutes, alarm_on, editing_idx=1)
         while self.rotary_enc.read_button() != 0:
             rotation = self.rotary_enc.rotation
             minutes = rotation % AlarmSettings.MINUTES
@@ -164,7 +162,6 @@ class RotaryController():
 
         # Editing On/Off
         self.rotary_enc.reset_status(int(alarm_on))
-        self.display.show_set_alarm(hours, minutes, alarm_on, editing_idx=2)
         while self.rotary_enc.read_button() != 0:
             rotation = self.rotary_enc.rotation
             alarm_on = bool(rotation % 2)
@@ -176,5 +173,19 @@ class RotaryController():
         alarm = f"{hours:02d}:{minutes:02d}"
         self.clock.update_settings(alarm=alarm, alarm_on=alarm_on, timezone=None)
 
+
     def edit_timezone(self):
-        pass
+        timezone = self.clock.alarm.timezone
+        current_idx = AlarmSettings.TIMEZONES.index(timezone)
+
+        # Editing Timezone
+        self.rotary_enc.reset_status(current_idx)
+        while self.rotary_enc.read_button() != 0:
+            rotation = self.rotary_enc.rotation
+            current_idx = rotation % len(AlarmSettings.TIMEZONES)
+            self.display.show_menu("Timezone", AlarmSettings.TIMEZONES, current_idx)
+        
+        while self.rotary_enc.read_button() == 0:
+            time.sleep(0.1)
+        
+        self.clock.update_settings(alarm=None, alarm_on=None, timezone=AlarmSettings.TIMEZONES[current_idx])

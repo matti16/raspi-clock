@@ -18,6 +18,7 @@ class Main():
     
 
 if __name__ == "__main__":
+    schedule.clear()
     main = Main()
     time.sleep(3)
     main.start()

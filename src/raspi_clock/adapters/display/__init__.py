@@ -158,12 +158,12 @@ class OLEDDisplay():
         with canvas(self.device) as draw:
             middle_y = self.device.height/2
 
-            draw.text((0, middle_y-DisplaySettings.MENU_TITLE_FONT.size/2), "Zone", font=DisplaySettings.MENU_TITLE_FONT, fill="white")
-            draw.polygon([(40, middle_y-5), (48, middle_y), (40, middle_y+5)], fill="white", outline="white")
+            draw.text((0, middle_y-DisplaySettings.MENU_TITLE_FONT.size/2), "TZ", font=DisplaySettings.MENU_TITLE_FONT, fill="white")
+            draw.polygon([(10, middle_y-5), (18, middle_y), (10, middle_y+5)], fill="white", outline="white")
 
             text_font = DisplaySettings.TIMEZONES_FONT
-            draw.text((55, middle_y-DisplaySettings.MENU_OPTIONS_FONT.size/2), options[current], font=text_font, fill="white")
+            draw.text((20, middle_y-DisplaySettings.MENU_OPTIONS_FONT.size/2), options[current], font=text_font, fill="white")
             if current > 0:
-                draw.text((55, 0), options[current-1], font=text_font, fill="white")
+                draw.text((20, 0), options[current-1], font=text_font, fill="white")
             if current < len(options) - 1:
-                draw.text((55, 50), options[current+1], font=text_font, fill="white")
+                draw.text((20, 50), options[current+1], font=text_font, fill="white")

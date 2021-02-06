@@ -90,7 +90,7 @@ class OLEDDisplay():
             self.draw_sun(draw, sun_x, sun_y)
             self.draw_moon(draw, moon_x, moon_y)
 
-            draw.bitmap((0,0), Image.open(DisplaySetting.BELL_ICON))
+            draw.bitmap((0,0), Image.open(DisplaySettings.BELL_ICON))
             
             draw.text(DisplaySettings.HOURS_TEXT_POS, f"{hours:02d} : {minutes:02d}", font=DisplaySettings.HOURS_FONT, fill="white")
             draw.text(DisplaySettings.DATE_TEXT_POS, today_date, font=DisplaySettings.DATE_FONT, fill="white")

@@ -75,7 +75,7 @@ class OLEDDisplay():
         return sun_x_position, moon_x_position
 
 
-    def show_sun_moon_clock(self, timezone, alarm=False):
+    def show_sun_moon_clock(self, timezone, alarm):
         with canvas(self.device) as draw:
             now = datetime.datetime.now(tz=pytz.timezone(timezone))
             today_date = now.strftime("%d - %m - %y")
@@ -90,7 +90,8 @@ class OLEDDisplay():
             self.draw_sun(draw, sun_x, sun_y)
             self.draw_moon(draw, moon_x, moon_y)
 
-            draw.bitmap((24, 24), Image.open(DisplaySettings.BELL_ICON), fill="white")
+            if alarm:
+                draw.bitmap((0, 0), Image.open(DisplaySettings.BELL_ICON), fill="white")
             
             draw.text(DisplaySettings.HOURS_TEXT_POS, f"{hours:02d} : {minutes:02d}", font=DisplaySettings.HOURS_FONT, fill="white")
             draw.text(DisplaySettings.DATE_TEXT_POS, today_date, font=DisplaySettings.DATE_FONT, fill="white")

@@ -52,7 +52,7 @@ class Alarm():
     def show_current_time(self, lock):
         while True:
             with lock:
-                self.display.show_sun_moon_clock(self.timezone)
+                self.display.show_sun_moon_clock(self.timezone, self.alarm_on)
             time.sleep(0.1)
     
 

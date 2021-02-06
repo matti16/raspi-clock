@@ -32,7 +32,7 @@ class DisplaySettings(object):
     MENU_TITLE_FONT = ImageFont.truetype(os.path.join(RESOURCES_PATH, "font", "LeagueGothic-Regular.otf"), 20)
     MENU_OPTIONS_FONT = ImageFont.truetype(os.path.join(RESOURCES_PATH, "font", "LeagueGothic-Regular.otf"), 16)
 
-    TIMEZONES_FONT = ImageFont.truetype(os.path.join(RESOURCES_PATH, "font", "Montserrat-Regular.otf"), 10)
+    TIMEZONES_FONT = ImageFont.truetype(os.path.join(RESOURCES_PATH, "font", "Montserrat-Regular.otf"), 9)
     
 
 class AudioSettings(object):

@@ -76,8 +76,7 @@ class OLEDDisplay():
     
 
     def draw_bell(self, draw, hours):
-        hours = hours % 12
-        if hours < 12:
+        if (6 < hours < 12) or (18 < hours < 24):
             draw.bitmap((95, 30), Image.open(DisplaySettings.BELL_ICON), fill="white")
         else:
             draw.bitmap((35, 30), Image.open(DisplaySettings.BELL_ICON), fill="white")

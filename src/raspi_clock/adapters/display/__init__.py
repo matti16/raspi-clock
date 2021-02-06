@@ -6,7 +6,7 @@ from luma.core.interface.serial import i2c
 from luma.oled.device import sh1106
 from luma.core.render import canvas
 
-from raspi_clock.setting import DisplaySettings, get_font
+from raspi_clock.setting import DisplaySettings, get_text_font
 
 class OLEDDisplay():
 

@@ -79,7 +79,7 @@ class OLEDDisplay():
         if (6 < hours < 12) or (18 < hours < 24):
             draw.bitmap((95, 30), Image.open(DisplaySettings.BELL_ICON), fill="white")
         else:
-            draw.bitmap((35, 30), Image.open(DisplaySettings.BELL_ICON), fill="white")
+            draw.bitmap((30, 30), Image.open(DisplaySettings.BELL_ICON), fill="white")
 
 
     def show_sun_moon_clock(self, timezone, alarm):

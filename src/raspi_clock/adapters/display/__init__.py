@@ -153,3 +153,20 @@ class OLEDDisplay():
                 draw.polygon([(99, 43), (102, 38), (105, 43)], fill="white", outline="white")
             elif editing_idx == 2:
                 draw.polygon([(65, 51), (70, 54), (65, 57)], fill="white", outline="white")
+    
+
+    def show_set_timezone(self, options, current):
+        with canvas(self.device) as draw:
+            middle_y = self.device.height/2
+
+            draw.text((0, middle_y-DisplaySettings.MENU_TITLE_FONT.size/2), "Timezone", font=DisplaySettings.MENU_TITLE_FONT, fill="white")
+            draw.polygon([(55, middle_y-5), (63, middle_y), (55, middle_y+5)], fill="white", outline="white")
+
+            draw.text(
+                (72, middle_y-DisplaySettings.MENU_OPTIONS_FONT.size/2), options[current], 
+                font=DisplaySettings.MENU_OPTIONS_FONT - 3, fill="white"
+            )
+            if current > 0:
+                draw.text((72, 0), options[current-1], font=DisplaySettings.MENU_OPTIONS_FONT - 3, fill="white")
+            if current < len(options) - 1:
+                draw.text((72, 50), options[current+1], font=DisplaySettings.MENU_OPTIONS_FONT -3, fill="white")

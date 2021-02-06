@@ -6,7 +6,7 @@ from luma.core.interface.serial import i2c
 from luma.oled.device import sh1106
 from luma.core.render import canvas
 
-from raspi_clock.setting import DisplaySettings
+from raspi_clock.setting import DisplaySettings, get_font
 
 class OLEDDisplay():
 
@@ -161,7 +161,7 @@ class OLEDDisplay():
             draw.text((0, middle_y-DisplaySettings.MENU_TITLE_FONT.size/2), "Timezone", font=DisplaySettings.MENU_TITLE_FONT, fill="white")
             draw.polygon([(55, middle_y-5), (63, middle_y), (55, middle_y+5)], fill="white", outline="white")
 
-            text_font = DisplaySettings.get_font(12)
+            text_font = get_font(12)
             draw.text((72, middle_y-DisplaySettings.MENU_OPTIONS_FONT.size/2), options[current], font=text_font, fill="white")
             if current > 0:
                 draw.text((72, 0), options[current-1], font=text_font, fill="white")

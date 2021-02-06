@@ -183,7 +183,7 @@ class RotaryController():
         while self.rotary_enc.read_button() != 0:
             rotation = self.rotary_enc.rotation
             current_idx = rotation % len(AlarmSettings.TIMEZONES)
-            self.display.show_menu("Timezone", AlarmSettings.TIMEZONES, current_idx)
+            self.display.show_set_timezone(AlarmSettings.TIMEZONES, current_idx)
         
         while self.rotary_enc.read_button() == 0:
             time.sleep(0.1)

@@ -294,7 +294,7 @@ class OLEDDisplay:
             )
 
             draw.text(
-                (65, 16),
+                (65, 18),
                 f"{hours:02d} : {minutes:02d}",
                 font=DisplaySettings.HOURS_FONT,
                 fill="white",
@@ -302,9 +302,9 @@ class OLEDDisplay:
 
             if editing_idx == 0:
                 draw.polygon(
-                    [(70, 43), (73, 38), (76, 43)], fill="white", outline="white"
+                    [(70, 48), (73, 43), (76, 48)], fill="white", outline="white"
                 )
             elif editing_idx == 1:
                 draw.polygon(
-                    [(99, 43), (102, 38), (105, 43)], fill="white", outline="white"
+                    [(99, 48), (102, 33), (105, 48)], fill="white", outline="white"
                 )

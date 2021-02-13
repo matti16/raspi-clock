@@ -21,10 +21,10 @@ SUNRISE = 6
 SUNSET = 18
 
 HOURS_TEXT_POS = (47, 22)
-HOURS_FONT = ImageFont.truetype("./LeagueGothic-Regular.otf", 25)
+HOURS_FONT = ImageFont.truetype("../resources/font/LeagueGothic-Regular.otf", 25)
 
 DATE_TEXT_POS = (45, 49)
-DATE_FONT = ImageFont.truetype("./LeagueGothic-Regular.otf", 15)
+DATE_FONT = ImageFont.truetype("../resources/font/LeagueGothic-Regular.otf", 15)
 
 
 def draw_moon(draw, cx, cy):

@@ -294,7 +294,7 @@ class OLEDDisplay:
             )
 
             draw.text(
-                (65, 32),
+                (65, 16),
                 f"{hours:02d} : {minutes:02d}",
                 font=DisplaySettings.HOURS_FONT,
                 fill="white",

@@ -3,8 +3,8 @@ from select import select
 
 from raspi_clock.setting import ClickerSettings
 
-class Clicker():
 
+class Clicker:
     def __init__(self, input_device=ClickerSettings.INPUT_DEVICE):
         self.input_device = input_device
 
@@ -12,9 +12,9 @@ class Clicker():
         try:
             clicker = InputDevice(self.input_device)
             print("Clicker present")
-            r,_,_ = select([clicker.fd], [], [], 0.1)
+            r, _, _ = select([clicker.fd], [], [], 0.1)
             while not r:
-                r,_,_ = select([clicker.fd], [], [], 0.1)
+                r, _, _ = select([clicker.fd], [], [], 0.1)
             print("Clicker pressed")
             clicker.close()
             return True
@@ -30,5 +30,5 @@ class Clicker():
                     found = True
                 except Exception:
                     pass
-        
+
         return True

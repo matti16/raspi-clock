@@ -208,10 +208,10 @@ class OLEDDisplay:
             )
 
     def show_alarm_animation(self, i):
-        steps = 16
+        steps = 32
         step = i % steps
         phase = step // (steps // 2)
-        radius = 64 * ((step - steps // 2) / (steps // 2))
+        radius = 64 * ((step % (steps // 2)) / (steps // 2))
 
         with canvas(self.device) as draw:
             draw.rectangle(

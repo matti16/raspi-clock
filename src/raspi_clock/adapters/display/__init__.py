@@ -200,12 +200,12 @@ class OLEDDisplay:
                 font=DisplaySettings.HOURS_FONT,
                 fill="white",
             )
-            draw.text(
-                DisplaySettings.DATE_TEXT_POS,
-                today_date,
-                font=DisplaySettings.DATE_FONT,
-                fill="white",
-            )
+            # draw.text(
+            #     DisplaySettings.DATE_TEXT_POS,
+            #     today_date,
+            #     font=DisplaySettings.DATE_FONT,
+            #     fill="white",
+            # )
 
     def show_alarm(self):
         with canvas(self.device) as draw:

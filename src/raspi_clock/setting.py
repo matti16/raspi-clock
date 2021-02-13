@@ -32,9 +32,9 @@ class DisplaySettings(object):
         os.path.join(RESOURCES_PATH, "font", "LeagueGothic-Regular.otf"), 26
     )
 
-    DATE_TEXT_POS = (45, 49)
+    DATE_TEXT_POS = (45, 55)
     DATE_FONT = ImageFont.truetype(
-        os.path.join(RESOURCES_PATH, "font", "LeagueGothic-Regular.otf"), 15
+        os.path.join(RESOURCES_PATH, "font", "LeagueGothic-Regular.otf"), 18
     )
 
     MENU_TITLE_FONT = ImageFont.truetype(

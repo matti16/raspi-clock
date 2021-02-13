@@ -18,7 +18,7 @@ class DisplaySettings(object):
     RAY_HEIGHT = 5
     ANGLED_RAYS_SCALE = 0.7
 
-    BELL_ICON = os.path.join(RESOURCES_PATH, "icons", "bell.bmp")
+    BELL_ICON = os.path.join(RESOURCES_PATH, "img", "bell.bmp")
     BELL_POS = (95, 30)
 
     MOON_RADIUS = 8
@@ -46,7 +46,7 @@ class DisplaySettings(object):
 
 
 class AudioSettings(object):
-    FILE_PATH = os.path.join(RESOURCES_PATH, "media", "Queen-Dont_Stop_Me_Now.mp3")
+    FILE_PATH = os.path.join(RESOURCES_PATH, "audio", "Queen-Dont_Stop_Me_Now.mp3")
 
 
 class ClickerSettings(object):

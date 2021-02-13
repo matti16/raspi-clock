@@ -51,11 +51,10 @@ class Alarm:
 
     def start_alarm(self, lock):
         with lock:
-            self.display.show_alarm()
             print("Staring alarm..")
             self.player.play()
             print("Waiting for click..")
-            self.clicker.wait_for_click()
+            self.clicker.wait_for_click(self.display)
             self.player.stop()
 
 

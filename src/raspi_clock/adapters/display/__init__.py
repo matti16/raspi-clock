@@ -207,9 +207,26 @@ class OLEDDisplay:
                 fill="white",
             )
 
-    def show_alarm(self):
+    def show_alarm_animation(self, i):
+        steps = 16
+        step = i % steps
+        phase = step // (steps // 2)
+        radius = 64 * ((step - steps // 2) / (steps // 2))
+
         with canvas(self.device) as draw:
-            draw.text((50, 25), "SVEGLIA!!!!!", fill="white")
+            draw.rectangle(
+                [0, 0, self.device.width, self.device.height],
+                fill="white" if phase else "black",
+            )
+            draw.ellipse(
+                (
+                    self.device.width / 2 - radius,
+                    self.device.height / 2 - radius,
+                    self.device.width / 2 + radius,
+                    self.device.height / 2 + radius,
+                ),
+                fill="black" if phase else "white",
+            )
 
     def show_menu(self, title, options, current):
         with canvas(self.device) as draw:

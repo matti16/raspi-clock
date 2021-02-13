@@ -171,7 +171,7 @@ class RotaryController:
         while self.rotary_enc.read_button() != 0:
             rotation = self.rotary_enc.rotation
             hours = rotation % AlarmSettings.HOURS
-            self.display.show_set_alarm(hours, minutes, editing_idx=0)
+            self.display.show_set_clock(hours, minutes, editing_idx=0)
 
         while self.rotary_enc.read_button() == 0:
             time.sleep(0.1)
@@ -181,7 +181,7 @@ class RotaryController:
         while self.rotary_enc.read_button() != 0:
             rotation = self.rotary_enc.rotation
             minutes = rotation % AlarmSettings.MINUTES
-            self.display.show_set_alarm(hours, minutes, editing_idx=1)
+            self.display.show_set_clock(hours, minutes, editing_idx=1)
 
         while self.rotary_enc.read_button() == 0:
             time.sleep(0.1)

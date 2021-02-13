@@ -200,12 +200,12 @@ class OLEDDisplay:
                 font=DisplaySettings.HOURS_FONT,
                 fill="white",
             )
-            # draw.text(
-            #     DisplaySettings.DATE_TEXT_POS,
-            #     today_date,
-            #     font=DisplaySettings.DATE_FONT,
-            #     fill="white",
-            # )
+            draw.text(
+                DisplaySettings.DATE_TEXT_POS,
+                today_date,
+                font=DisplaySettings.DATE_FONT,
+                fill="white",
+            )
 
     def show_alarm(self):
         with canvas(self.device) as draw:
@@ -302,9 +302,9 @@ class OLEDDisplay:
 
             if editing_idx == 0:
                 draw.polygon(
-                    [(70, 50), (73, 55), (76, 50)], fill="white", outline="white"
+                    [(70, 50), (73, 45), (76, 50)], fill="white", outline="white"
                 )
             elif editing_idx == 1:
                 draw.polygon(
-                    [(99, 50), (102, 55), (105, 50)], fill="white", outline="white"
+                    [(102, 50), (105, 45), (108, 50)], fill="white", outline="white"
                 )

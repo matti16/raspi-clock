@@ -306,5 +306,5 @@ class OLEDDisplay:
                 )
             elif editing_idx == 1:
                 draw.polygon(
-                    [(102, 50), (105, 45), (108, 50)], fill="white", outline="white"
+                    [(100, 50), (103, 45), (106, 50)], fill="white", outline="white"
                 )
